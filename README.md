@@ -1,8 +1,6 @@
 # FamFood
 Canteen Automation System - Android App &amp; Website
 
-![Logo](https://user-images.githubusercontent.com/29853549/119223623-19b78980-bb18-11eb-8376-0a0c3f2dd449.png=80px)
-
 **Aim:** Develop an app that replaces the current manual system at the food eateries of taking orders at counters, then providing receipts and waiting to get orders for undefined amount of time.
 
 **Description:**

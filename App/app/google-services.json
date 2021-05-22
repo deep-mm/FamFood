@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1000709043383",
+    "firebase_url": "https://cars-8af71.firebaseio.com",
+    "project_id": "cars-8af71",
+    "storage_bucket": "cars-8af71.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1000709043383:android:44c24a8f95eae132",
+        "android_client_info": {
+          "package_name": "com.canteenautomation.famfood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1000709043383-f2nqc0plu7u9eam8fl9nea0ic5fbc2pt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZqMgZYGQvyy_O2Zyd_RQ_CNQ6gH223E4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

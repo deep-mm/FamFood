@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="10dp"
+    android:background="@color/transparent">
+
+    <RelativeLayout
+        android:id="@+id/main_box"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:padding="4dp"
+        android:background="@drawable/rectangle">
+
+        <LinearLayout
+            android:id="@+id/feedback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true">
+
+            <TextView
+                android:id="@+id/feedback_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/give_feedback"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/main_orange_color"
+                android:layout_marginTop="4dp"
+                android:textSize="12sp"/>
+
+            <ImageView
+                android:id="@+id/feedback_icon"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="3dp"
+                android:background="@drawable/feedback"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/college_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="K J Somaiya College of Engineering"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="3dp"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@id/feedback"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/order_dateTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/order_datetime"
+            android:layout_alignStart="@id/college_name"
+            android:layout_below="@+id/college_name"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/itemlist_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="@string/items_history"
+            android:textStyle="bold"
+            android:textColor="@color/purple"
+            android:layout_below="@id/order_dateTime"
+            android:layout_marginTop="4dp"
+            android:layout_alignStart="@id/college_name"/>
+
+        <TextView
+            android:id="@+id/item_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Veg Fried Rice, Lunch, Bhel, Shezwan Rice, Veg Sandwich, Watermelon Juice, Burger "
+            android:textSize="14sp"
+            android:layout_alignStart="@id/college_name"
+            android:layout_below="@id/itemlist_heading"
+            android:textColor="@color/purple"/>
+
+        <TextView
+            android:id="@+id/totslprice_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="@string/total_price_heading"
+            android:textStyle="bold"
+            android:textColor="@color/nav_blue"
+            android:layout_below="@id/item_list"
+            android:layout_marginTop="4dp"
+            android:layout_alignStart="@id/college_name"/>
+
+        <TextView
+            android:id="@+id/total_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="$ 256 "
+            android:textSize="14sp"
+            android:layout_alignStart="@id/college_name"
+            android:layout_below="@id/totslprice_heading"
+            android:textColor="@color/nav_blue"
+            android:layout_marginLeft="2dp"
+            android:layout_marginBottom="6dp"/>
+
+        <Button
+            android:id="@+id/track_button"
+            android:layout_width="70dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:background="@color/colorPrimaryDark"
+            android:text="TRACK"
+            android:gravity="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="12sp"
+            android:layout_below="@id/item_list"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="14dp"
+            android:visibility="invisible"/>
+
+        <LinearLayout
+            android:id="@+id/reorder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/track_button"
+            android:layout_below="@id/totslprice_heading"
+            android:visibility="invisible">
+
+            <ImageView
+                android:id="@+id/reorder_icon"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:background="@mipmap/reorder" />
+
+            <Button
+                android:id="@+id/re_order_button"
+                android:layout_width="60dp"
+                android:layout_height="16dp"
+                android:background="@color/transparent"
+                android:text="Reorder"
+                android:gravity="center"
+                android:textColor="@color/colorGreen"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/failedTransaction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_below="@id/totslprice_heading">
+
+            <ImageView
+                android:id="@+id/failedTransaction_icon"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:background="@mipmap/failed_transaction" />
+
+            <Button
+                android:id="@+id/failedTransaction_button"
+                android:layout_width="wrap_content"
+                android:layout_height="16dp"
+                android:textAllCaps="false"
+                android:layout_marginLeft="4dp"
+                android:background="@color/transparent"
+                android:text="Transaction Failed"
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

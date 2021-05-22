@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/transparent"
+    android:layout_margin="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/solid_rectangle">
+
+        <ImageView
+            android:id="@+id/profile_pic"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/profile_female" />
+
+        <TextView
+            android:id="@+id/profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="6dp"
+            android:layout_toEndOf="@+id/profile_pic"
+            android:text="Urvashi"
+            android:textColor="@color/nav_blue"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/dateTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/colorGreyDark"
+            android:textSize="12sp"
+            android:layout_margin="6dp"
+            android:text="12/01/19 12:32"/>
+
+        <TextView
+            android:id="@+id/review_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/profile_name"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@color/black"
+            android:layout_marginBottom="10dp"
+            android:text="Family and I have eaten here several times. Love the food, the best place in town! Thank you to the Chef and the cooks that prepare the delicious food."
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/greyLine"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/review_text"
+            android:background="@drawable/grey_line_horizontal" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/feedback_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/greyLine"
+            android:layout_above="@id/comment"
+            android:layout_marginHorizontal="16dp"
+            tools:listitem="@layout/fragment_feedback" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

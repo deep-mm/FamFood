@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>  Order History  </title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- Title Page-->
+    <title>Order History</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="/css/font-face.css" rel="stylesheet" media="all">
+    <link href="/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+
+    <!-- Main CSS-->
+    <link href="/css/theme.css" rel="stylesheet" media="all">
+    <link href="/css/currentPage.css" rel="stylesheet" media="all">
+
+    <style>
+        table
+        {
+            width: 70%;
+            font: 17px Calibri;
+        }
+        table, th, td
+        {
+            border: solid 1px #DDD;
+            border-collapse: collapse;
+            padding: 2px 3px;
+            text-align: center;
+        }
+    </style>
+    <style>
+    * {box-sizing: border-box;}
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .header {
+      overflow: hidden;
+      background-color: #f1f1f1;
+      padding: 20px 10px;
+    }
+
+    .header a {
+      float: left;
+      color: black;
+      text-align: center;
+      padding: 12px;
+      text-decoration: none;
+      font-size: 18px;
+      line-height: 25px;
+      border-radius: 4px;
+    }
+
+    .header a.logo {
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .header a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+
+    .header a.active {
+      background-color: dodgerblue;
+      color: white;
+    }
+
+    .header-right {
+      float: right;
+    }
+
+    @media screen and (max-width: 500px) {
+      .header a {
+        float: none;
+        display: block;
+        text-align: left;
+      }
+
+      .header-right {
+        float: none;
+      }
+    }
+    </style>
+
+</head>
+
+<body class="animsition" onload="createTable()">
+  {{#each data}}
+
+    <input type = "hidden" id = "thingIWant" value ="{{this}}"  />
+  {{/each}}
+    <div class="page-wrapper">
+      <!-- Header-->
+
+      <div class="header">
+        <img id="history-logo" src="" class="logo" alt="App logo" height="50px" width="50px" style="background-color: white;"/>
+        <div class="header-right">
+          <a id="home" onclick="redirect()" href="">Home</a>
+          <script>
+              function redirect() {
+                  document.getElementById("home").href = "home" + (window.location.search);
+              }
+          </script>
+          <a id="Menu" onclick="redirect2()" href="">Change Menu</a>
+          <script>
+              function redirect2() {
+                  document.getElementById("Menu").href = "Menu" + (window.location.search);
+              }
+          </script>
+          <a class="active" href="">Order History</a>
+          <a href="/logout">Logout</a>
+        </div>
+        <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-messaging.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-functions.js"></script>
+        <script>
+        var config = {
+          apiKey: "AIzaSyDfqNXhVbc62NB5otyn_52679JUQ5Rrb64",
+          authDomain: "cars-8af71.firebaseapp.com",
+          databaseURL: "https://cars-8af71.firebaseio.com",
+          projectId: "cars-8af71",
+          storageBucket: "cars-8af71.appspot.com",
+          messagingSenderId: "1000709043383"
+        };
+        firebase.initializeApp(config);
+
+        var storageRef = firebase.storage().ref();
+          var spaceRef = storageRef.child('canteen001/app/app_logo.png');
+      //    alert(spaceRef);
+          storageRef.child('canteen001/app/app_logo.png').getDownloadURL().then(function(url) {
+              var test = url;
+        //      alert(url);
+              document.getElementById('history-logo').src = test;
+
+          }).catch(function(error) {
+
+          });
+
+
+        </script>
+      </div>
+
+
+<!-- Header-->
+
+        <!-- PAGE CONTENT-->
+<body onload="getamount();">
+  <h4>Select time period for diplaying amount:<select id="selop" class="selop" onchange="getamount();" name="selop">
+
+  <option>Today</option>
+  <option>Past one week</option>
+  <option>Past Month</option>
+
+</select><br><br>
+
+<script>
+
+function getamount()
+{
+  var amount=0;
+  var selecteddate="";
+//  alert(document.getElementById("selop").value);
+  if(document.getElementById("selop").value=="Today")
+  {
+    selecteddate = (new Date().getDate() < 10 ? '0' : '') + new Date().getDate()+"-"
+
+              + (new Date().getMonth() < 10 ? '0' : '') + (new Date().getMonth()+1)+"-"
+            + (new Date()).getFullYear();
+        //    alert("selecteddate"+selecteddate);
+  }
+  else if(document.getElementById("selop").value=="Past one week")
+  {
+    selecteddate = ((new Date().getDate() < 10 ? '0' : '') + new Date().getDate()-7)+"-"
+
+              + (new Date().getMonth() < 10 ? '0' : '') + (new Date().getMonth()+1)+"-"
+            + (new Date()).getFullYear();
+        //    alert(selecteddate.length);
+            if(selecteddate.length==9)
+            {
+              selecteddate = "0"+selecteddate;
+            }
+          //  alert("selecteddate"+selecteddate);
+  }
+  else {
+    selecteddate = ((new Date().getDate() < 10 ? '0' : '') + new Date().getDate())+"-"
+
+              + (new Date().getMonth() < 10 ? '0' : '') + (new Date().getMonth())+"-"
+            + (new Date()).getFullYear();
+          //  alert(selecteddate.length);
+            if(selecteddate.length==9)
+            {
+              selecteddate = "0"+selecteddate;
+            }
+        //    alert("selecteddate"+selecteddate);
+
+  }
+//  alert("date to compare" + selecteddate);
+  var ref9 = firebase.database().ref("/Order/");
+  ref9.on("value",function(snapshot9){
+      snapshot9.forEach(function(data9){
+      //  alert(data9.key);
+
+        var ref10 = firebase.database().ref("/Order/"+data9.key+"/");
+        ref10.on("value",function(snapshot10){
+          snapshot10.forEach(function(data10){
+          //  alert(data10.key);
+          //  alert(data10.val().order_time);
+          //  alert((data10.val().order_time.split(" ")[0].replace(new RegExp('-', 'g'),"/"))+" 00:00");
+            var date1 =data10.val().order_time.split(" ")[0];
+            var date14 = data10.val().order_time.split(" ");
+            var date11 =  date14[0].split("-");
+            var date22 = selecteddate.split("-");
+
+            var date13 =new Date(date11[1]+"/"+date11[0]+"/"+date11[2]);
+            var date23 = new Date(date22[1]+"/"+date22[0]+"/"+date22[2]);
+        //  alert(date23);
+            var transactionstatus= data10.val().transactionStatus;
+
+
+            if((date13>=date23) && (transactionstatus=="TXN_SUCCESS"))
+            {
+            //  alert("innnnnnnnnn");
+              amount = amount + parseInt(data10.val().amount);
+          //    alert(amount);
+              document.getElementById("amount").value=amount;
+            }
+
+          });
+        },function(err){
+
+        });
+
+      });
+  },function(err){
+    console.log(err);
+  });
+  }
+</script>
+<script>getamount();</script>
+  <h3>Amount Collected:₹<input type="text" id="amount" name="" value="" readonly>
+    <br>
+    <br>
+    <h4 style="margin-left:20%">Items Sold Today</h4>
+  <div class="" style="overflow-y:hidden; width:50%;margin-left:20%;">
+      <label for="x_card_code" class="control-label mb-1"></label>
+      <div class="">
+      <div  class="" style="background-color:#F1F1F1;">
+        <div  class="table-responsive m-b-40">
+          <table class="table table-borderless table-data3" id="myTable" >
+        <tbody>
+
+        <script>
+            var table = document.getElementById("myTable");
+            var ordertoken = [];
+            var userid = [];
+            var orderid = [];
+            var itemnames = [];
+            var fprice = [];
+            var stat = [];
+            var quantity = [];
+            var delivery =[];
+            var ordertime =[];
+            var ref = firebase.database().ref("/Order/");
+            ref.on("value", function (snapshot) {
+              ordertoken = [];
+              userid = [];
+              orderid = [];
+              itemnames = [];
+              fprice = [];
+              stat = [];
+              quantity = [];
+              delivery =[];
+              ordertime =[];
+                while (table.hasChildNodes()) {
+                    //          alert("In");
+                    table.removeChild(table.firstChild);
+                }
+                //  alert("first");
+
+                //document.write("fff");
+                var b = 0;
+                snapshot.forEach(function (data) {
+
+                    var ref2 = firebase.database().ref("/Order/" + data.key);
+                    ref2.once("value", function (snapshot1) {
+                        //  alert("data key"+data.key);
+                        snapshot1.forEach(function (data1) {
+                            console.log("next key" + data1.key);
+                            //    alert("data1 key"+data1.key);
+                            var c = data1.val();
+                            var customer = c.customerName;
+                            var user_id = c.user_id;
+                            var order_id = c.order_id;
+                            var order_token = c.order_token;
+                            var order_time = c.order_time;
+                            var delivery_add = c.delivery_add;
+                            var transactionstatus = c.transactionStatus;
+
+                            var item1;
+                            var fprice1;
+                            var quantity1;
+                            var status1;
+                            //    alert("length of snapshot"+snapshot1.numChildren());
+                            for (var k = 0; k < 10; k++) {
+
+
+                                var ref3 = firebase.database().ref("/Order/" + data.key + "/" + data1.key + "/" + "orderItemEntitty" + "/" + k + "/");
+                                ref3.once("value", function (snapshot2) {
+                                    //  alert("item"+k);
+                                    snapshot2.forEach(function (data2) {
+                                        //  alert("data2      keyy"+data2.key);
+
+                                        if (data2.key == "itemName") {
+
+                                            item1 = data2.val();
+                                            //    alert("aaaaaaaaaaaaaaaaaa"+item1);
+                                        }
+
+                                        if (data2.key == "quantity") {
+                                            quantity1 = data2.val();
+                                        }
+                                        if (data2.key == "status") {
+                                            status1 = data2.val();
+
+                                            if ((status1 == 0 || status1 == 1 || status1 == 2 || status1 == 3 || status1 == 4) && (order_time.split(" ")[0]==(new Date().getDate() < 10 ? '0' : '') + new Date().getDate()+"-"
+
+                                                      + (new Date().getMonth() < 10 ? '0' : '') + (new Date().getMonth()+1)+"-"
+                                                    + (new Date()).getFullYear()) && (transactionstatus=="TXN_SUCCESS"))
+                                            {
+                                            //        alert("asdsfggfgdfgsgagsgaf");
+                                                userid[b] = user_id;
+                                                orderid[b] = order_id;
+                                                ordertoken[b] = order_token;
+                                                quantity[b] = quantity1;
+                                                stat[b] = status1;
+                                                ordertime[b] = order_time;
+                                                //  fprice[b] = fprice1;
+                                                itemnames[b] = item1;
+                                          //      alert(delivery_add);
+                                                delivery[b] = delivery_add;
+
+                                                //    alert("aaaaaa"+itemnames[b]+  quantity[b] );
+                                                //  $("myTable").children().remove()'
+
+
+                                                b++;
+
+                                            }
+                                        }
+
+                                        //  document.write(data2.val());
+                                    });
+
+                                }, function (errorObject) {
+                                    console.log("The read failed: " + errorObject.code);
+                                });
+                            }
+                        });
+
+
+                    }, function (errorObject) {
+                        console.log("The read failed: " + errorObject.code);
+                    });
+
+                });
+                //  table.innerHTML = "";
+                var temp1,temp2,temp3,temp4,temp5,temp6,temp7,temp8;
+                    for(var i = 0; i < orderid.length; i++) {
+                       for(var j=1; j < (orderid.length-i); j++) {
+                    //     alert(ordertime[j-1].indexOf(":"));
+                         var first = ordertime[j-1].indexOf(":");
+                         var second = ordertime[j].indexOf(":")
+                      //    alert("first"+ordertime[j-1].substring(first-2));
+                      //    alert("second"+ordertime[j].substring(second-2));
+                          if((ordertime[j-1]) >(ordertime[j]))
+                          {
+                      //      alert("swap");
+                            temp1 = orderid[j-1];
+                            orderid[j-1] = orderid[j];
+                            orderid[j] = temp1;
+                            temp2 = ordertime[j-1];
+                            ordertime[j-1] = ordertime[j];
+                            ordertime[j] = temp2;
+                            temp3 = quantity[j-1];
+                            quantity[j-1] = quantity[j];
+                            quantity[j] = temp3;
+                            temp4 = userid[j-1];
+                            userid[j-1] = userid[j];
+                            userid[j] = temp4;
+                            temp5 = stat[j-1];
+                            stat[j-1] = stat[j];
+                            stat[j] = temp5;
+                            temp6 = itemnames[j-1];
+                            itemnames[j-1] = itemnames[j];
+                            itemnames[j] = temp6;
+                            temp7 = ordertoken[j-1];
+                            ordertoken[j-1] = ordertoken[j];
+                            ordertoken[j] = temp7;
+                            temp8 = delivery[j-1];
+                            delivery[j-1] = delivery[j];
+                            delivery[j] = temp8;
+                          }
+                       }
+                    }
+                var corders;var head=0;
+                  for (var o = 0; o < itemnames.length; o++) {
+              //      alert("vallll"+o);
+                //      alert("length"+quantity.length);
+                corders = {
+                    User_Id: userid[o],
+                    Order_Id: orderid[o],
+                    OrderToken: ordertoken[o],
+                    Item: itemnames[o],
+                    Status: "Order Prepared",
+                    Address: "E/A102",
+                    Quantity: quantity[o],
+                    delivery_add:delivery[o]
+                };
+
+                if (head == 0) {
+                    var header = table.createTHead();
+                    var row = header.insertRow(0);
+
+
+                    var cell4 = row.insertCell(0);
+                    var cell5 = row.insertCell(1);
+
+
+
+
+                    cell4.style.color = "white";
+                    cell5.style.color = "white";
+
+
+
+                    cell4.innerHTML = "Item Name";
+                    cell5.innerHTML = "Quantity";
+
+
+                    cell4.style.textAlign = "center";
+                    cell5.style.textAlign = "center";
+
+                      head++;
+                }
+
+
+
+                var row = table.insertRow(o+1);
+
+
+                var cell4 = row.insertCell(0);
+                var cell5 = row.insertCell(1);
+                //cell4.id='select';
+
+                var dropdown = "<input style=\"width:80px;height:33px\" type=\"button\" id=\"select1" + b + "\" onclick=\"getId(this)\"  class=\"btn btn-success\" value=\"Accept\" >\n" +
+                        "<input style=\"width:80px;height:33px\" type=\"button\" id=\"select1" + b + "\" onclick=\"getId1(this)\"  class=\"btn btn-danger\" value=\"Reject\" >\n" +
+
+
+                        "<\/SELECT>";
+
+
+                row.style.backgroundColor = "white";
+
+
+                cell4.innerHTML = corders.Item;
+
+
+                //  document.getElementById('select'+b).value = '2'
+
+                cell5.innerHTML = corders.Quantity;
+              //  alert(delivery[o]);
+              //  alert(itemnames[o]);
+
+              //  cell7.innerHTML = "orders"
+
+
+                cell4.style.textAlign = "center";
+                cell5.style.textAlign = "center";
+
+                cell4.setAttribute('class','itemname');
+              }
+
+            }, function (errorObject) {
+                console.log("The read failed: " + errorObject.code);
+            });
+
+
+            function  getId(element) {
+              //      alert("row" + element.parentNode.parentNode.rowIndex +
+              //      " - column" + element.parentNode.cellIndex);
+                    var row = element.parentNode.parentNode.rowIndex;
+                    var column = element.parentNode.cellIndex;
+              //      alert(document.getElementById("myTable").rows[row].cells[1].innerHTML);
+              //      alert(document.getElementById("myTable").rows[row].cells[0].innerHTML);
+              //      alert("USER"+ userid[row - 1]);
+              //      alert("ORDER"+orderid[row-1]);
+
+                    var ref4 = firebase.database().ref("/Order/" + userid[row - 1] + "/" + orderid[row - 1] + "/" + "orderItemEntitty" + "/");
+                    ref4.once("value", function (snapshot) {
+                        var flag = 0;
+                        snapshot.forEach(function (data) {
+                            //      alert("innn"+data.key);
+
+                            if (flag == 0) {
+                                var itemval = data.val();
+                                var itemId1 = itemval.itemId;
+                                var quantity1 = itemval.quantity;
+                                var itemName1 = itemval.itemName;
+                                var jain1 = itemval.jain;
+                                var orderPlaced = itemval.orderPlaced;
+                            //    var statusUpdateTime itemval.statusUpdateTime;
+                                var stat=1;
+
+                            //    alert(statusUpdateTime);
+                                //  alert(itemId1);
+                                if (itemName1 == document.getElementById("myTable").rows[row].cells[1].innerHTML) {
+                                    //      alert("inside biggest ac"+"data key"+data.key);
+                                    var data1={0:(new Date().getDate() < 10 ? '0' : '') + new Date().getDate()+"-"
+
+                                              + (new Date().getMonth() < 10 ? '0' : '') + (new Date().getMonth()+1)+"-"
+                                            + (new Date()).getFullYear() + " " +orderPlaced};
+                                    var ref5 = firebase.database().ref("/Order/" + userid[row - 1] + "/" + orderid[row - 1] + "/" + "orderItemEntitty" + "/" + data.key + "/");
+                                    ref5.set({
+                                        itemId: itemId1,
+                                        itemName: itemName1,
+                                        status: stat,
+                                        jain: jain1,
+                                        quantity: quantity1,
+                                        orderPlaced:orderPlaced,
+                                        confirmed: (new Date().getHours() < 10 ? '0' : '') + new Date().getHours()+":"
+                                        + (new Date().getMinutes() < 10 ? '0' : '') + new Date().getMinutes(),
+                                        statusUpdateTime:data1
+                                    });
+
+                                    flag++;
+                                }
+
+                            }
+                        });
+                    }, function (errorObject) {
+                        console.log("error");
+                    });
+                }
+                function  getId1(element) {
+                  //      alert("row" + element.parentNode.parentNode.rowIndex +
+                  //      " - column" + element.parentNode.cellIndex);
+                        var row = element.parentNode.parentNode.rowIndex;
+                        var column = element.parentNode.cellIndex;
+                  //      alert(document.getElementById("myTable").rows[row].cells[1].innerHTML);
+                    //    alert(document.getElementById("myTable").rows[row].cells[0].innerHTML);
+                    //    alert("USER"+ userid[row - 1]);
+                    //    alert("ORDER"+orderid[row-1]);
+
+                        var ref4 = firebase.database().ref("/Order/" + userid[row - 1] + "/" + orderid[row - 1] + "/" + "orderItemEntitty" + "/");
+                        ref4.once("value", function (snapshot) {
+                            var flag = 0;
+                            snapshot.forEach(function (data) {
+                                //      alert("innn"+data.key);
+
+                                if (flag == 0) {
+                                    var itemval = data.val();
+                                    var itemId1 = itemval.itemId;
+                                    var quantity1 = itemval.quantity;
+                                    var itemName1 = itemval.itemName;
+                                    var jain1 = itemval.jain;
+                                    var orderPlaced = itemval.orderPlaced;
+
+                                    var stat=-1;
+
+
+                                    //  alert(itemId1);
+                                    if (itemName1 == document.getElementById("myTable").rows[row].cells[1].innerHTML) {
+                                        //      alert("inside biggest ac"+"data key"+data.key);
+
+                                        var ref5 = firebase.database().ref("/Order/" + userid[row - 1] + "/" + orderid[row - 1] + "/" + "orderItemEntitty" + "/" + data.key + "/");
+                                        ref5.set({
+                                            itemId: itemId1,
+                                            itemName: itemName1,
+                                            status: stat,
+                                            jain: jain1,
+                                            quantity: quantity1,
+                                            orderPlaced:orderPlaced,
+                                            rejected: (new Date().getHours() < 10 ? '0' : '') + new Date().getHours()+":"
+                                            + (new Date().getMinutes() < 10 ? '0' : '') + new Date().getMinutes()
+                                        });
+                                        flag++;
+                                    }
+
+                                }
+                            });
+                        }, function (errorObject) {
+                            console.log("error");
+                        });
+                    }
+
+
+
+
+
+        </script>
+        </tbody>
+      </table>
+    </div>
+    </div>
+
+      </div>
+  </div>
+
+
+</body>
+
+
+
+
+    <!-- Jquery JS-->
+    <script src="query-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    <script src="popper.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <!-- Vendor JS       -->
+    <script src="slick.min.js">
+    </script>
+    <script src="wow.min.js"></script>
+    <script src="animsition.min.js"></script>
+    <script src="bootstrap-progressbar.min.js">
+    </script>
+    <script src="jquery.waypoints.min.js"></script>
+    <script src="jquery.counterup.min.js">
+    </script>
+    <script src="circle-progress.min.js"></script>
+    <script src="perfect-scrollbar.js"></script>
+    <script src="Chart.bundle.min.js"></script>
+    <script src="select2.min.js">
+    </script>
+
+    <!-- Main JS-->
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
+<!-- end document-->

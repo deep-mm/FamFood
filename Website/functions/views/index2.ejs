@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<script>
+
+
+
+  var i=0;
+  var arrHead = new Array();
+  arrHead = ['', 'Item Name', 'Quantity', 'Price'];
+       // SIMPLY ADD OR REMOVE VALUES IN THE ARRAY FOR TABLE HEADERS.
+
+  // FIRST CREATE A TABLE STRUCTURE BY ADDING A FEW HEADERS AND
+  // ADD THE TABLE TO YOUR WEB PAGE.
+  function createTable() {
+
+      var empTable = document.createElement('table');
+      empTable.setAttribute('id', 'empTable');            // SET THE TABLE ID.
+
+      var tr = empTable.insertRow(-1);
+
+      for (var h = 0; h < arrHead.length; h++) {
+          var th = document.createElement('th');          // TABLE HEADER.
+          th.innerHTML = arrHead[h];
+          tr.appendChild(th);
+      }
+
+      var div = document.getElementById('cont');
+      div.appendChild(empTable);    // ADD THE TABLE TO YOUR WEB PAGE.
+  }
+
+</script>
+
+
+
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQuery UI Autocomplete - Default functionality</title>
+      <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+      <link rel="stylesheet" href="/resources/demos/style.css">
+
+    <!-- Title Page-->
+    <title>Dashboard 5</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="font-face.css" rel="stylesheet" media="all">
+    <link href="material-design-iconic-font.min.css" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="bootstrap.min.css" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+
+    <!-- Main CSS-->
+    <link href="theme.css" rel="stylesheet" media="all">
+
+    <style>
+        table
+        {
+            width: 70%;
+            font: 17px Calibri;
+        }
+        table, th, td
+        {
+            border: solid 1px #DDD;
+            border-collapse: collapse;
+            padding: 2px 3px;
+            text-align: center;
+        }
+    </style>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-messaging.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-functions.js"></script>
+<script>
+
+var config = {
+  apiKey: "AIzaSyDfqNXhVbc62NB5otyn_52679JUQ5Rrb64",
+  authDomain: "cars-8af71.firebaseapp.com",
+  databaseURL: "https://cars-8af71.firebaseio.com",
+  projectId: "cars-8af71",
+  storageBucket: "cars-8af71.appspot.com",
+  messagingSenderId: "1000709043383"
+};
+firebase.initializeApp(config);
+</script>
+</head>
+
+<body class="animsition" onload="createTable()">
+    <div class="page-wrapper">
+        <!-- HEADER DESKTOP-->
+        <header class="header-desktop3 d-none d-lg-block">
+            <div class="section__content section__content--p35">
+                <div class="header3-wrap">
+                    <div class="header__logo">
+                        <a href="#">
+                          <img  id="index-logo" src="" alt="App logo" width="50px" height="50px" style="background-color: white;"/>
+                        </a>
+                    </div>
+
+
+                    <div class="header__navbar">
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href="index5.html">
+                                    <i class="fas fa-tachometer-alt"></i>Dashboard
+                                    <span class="bot-line"></span>
+                                </a>
+
+                            </li>
+
+
+                            <li>
+                                <a href="menu">
+                                    <i ></i>
+                                    <span class="bot-line"></span>Menu</a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i ></i>
+                                    <span class="bot-line"></span>Help</a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </header>
+        <!-- END HEADER DESKTOP-->
+
+        <!-- HEADER MOBILE-->
+        <header class="header-mobile header-mobile-2 d-block d-lg-none">
+            <div class="header-mobile__bar">
+                <div class="container-fluid">
+                    <div class="header-mobile-inner">
+                        <a class="logo" href="index.html">
+                            <img src="images/icon/logo-white.png" alt="CoolAdmin" />
+                        </a>
+                        <button class="hamburger hamburger--slider" type="button">
+                            <span class="hamburger-box">
+                                <span class="hamburger-inner"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <nav class="navbar-mobile">
+                <div class="container-fluid">
+                    <ul class="navbar-mobile__list list-unstyled">
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-tachometer-alt"></i>Dashboard</a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="index.html">Dashboard 1</a>
+                                </li>
+                                <li>
+                                    <a href="index2.html">Dashboard 2</a>
+                                </li>
+                                <li>
+                                    <a href="index3.html">Dashboard 3</a>
+                                </li>
+                                <li>
+                                    <a href="index4.html">Dashboard 4</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="chart.html">
+                                <i class="fas fa-chart-bar"></i>Charts</a>
+                        </li>
+                        <li>
+                            <a href="table.html">
+                                <i class="fas fa-table"></i>Tables</a>
+                        </li>
+                        <li>
+                            <a href="form.html">
+                                <i class="far fa-check-square"></i>Forms</a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-calendar-alt"></i>Calendar</a>
+                        </li>
+                        <li>
+                            <a href="map.html">
+                                <i class="fas fa-map-marker-alt"></i>Maps</a>
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-copy"></i>Pages</a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="login.html">Login</a>
+                                </li>
+                                <li>
+                                    <a href="register.html">Register</a>
+                                </li>
+                                <li>
+                                    <a href="forget-pass.html">Forget Password</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fas fa-desktop"></i>UI Elements</a>
+                            <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                                <li>
+                                    <a href="button.html">Button</a>
+                                </li>
+                                <li>
+                                    <a href="badge.html">Badges</a>
+                                </li>
+                                <li>
+                                    <a href="tab.html">Tabs</a>
+                                </li>
+                                <li>
+                                    <a href="card.html">Cards</a>
+                                </li>
+                                <li>
+                                    <a href="alert.html">Alerts</a>
+                                </li>
+                                <li>
+                                    <a href="progress-bar.html">Progress Bars</a>
+                                </li>
+                                <li>
+                                    <a href="modal.html">Modals</a>
+                                </li>
+                                <li>
+                                    <a href="switch.html">Switchs</a>
+                                </li>
+                                <li>
+                                    <a href="grid.html">Grids</a>
+                                </li>
+                                <li>
+                                    <a href="fontawesome.html">Fontawesome Icon</a>
+                                </li>
+                                <li>
+                                    <a href="typo.html">Typography</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div class="sub-header-mobile-2 d-block d-lg-none">
+            <div class="header__tool">
+                <div class="header-button-item has-noti js-item-menu">
+                    <i class="zmdi zmdi-notifications"></i>
+                    <div class="notifi-dropdown notifi-dropdown--no-bor js-dropdown">
+                        <div class="notifi__title">
+                            <p>You have 3 Notifications</p>
+                        </div>
+                        <div class="notifi__item">
+                            <div class="bg-c1 img-cir img-40">
+                                <i class="zmdi zmdi-email-open"></i>
+                            </div>
+                            <div class="content">
+                                <p>You got a email notification</p>
+                                <span class="date">April 12, 2018 06:50</span>
+                            </div>
+                        </div>
+                        <div class="notifi__item">
+                            <div class="bg-c2 img-cir img-40">
+                                <i class="zmdi zmdi-account-box"></i>
+                            </div>
+                            <div class="content">
+                                <p>Your account has been blocked</p>
+                                <span class="date">April 12, 2018 06:50</span>
+                            </div>
+                        </div>
+                        <div class="notifi__item">
+                            <div class="bg-c3 img-cir img-40">
+                                <i class="zmdi zmdi-file-text"></i>
+                            </div>
+                            <div class="content">
+                                <p>You got a new file</p>
+                                <span class="date">April 12, 2018 06:50</span>
+                            </div>
+                        </div>
+                        <div class="notifi__footer">
+                            <a href="#">All notifications</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-button-item js-item-menu">
+                    <i class="zmdi zmdi-settings"></i>
+                    <div class="setting-dropdown js-dropdown">
+                        <div class="account-dropdown__body">
+                            <div class="account-dropdown__item">
+                                <a href="#">
+                                    <i class="zmdi zmdi-account"></i>Account</a>
+                            </div>
+                            <div class="account-dropdown__item">
+                                <a href="#">
+                                    <i class="zmdi zmdi-settings"></i>Setting</a>
+                            </div>
+                            <div class="account-dropdown__item">
+                                <a href="#">
+                                    <i class="zmdi zmdi-money-box"></i>Billing</a>
+                            </div>
+                        </div>
+                        <div class="account-dropdown__body">
+                            <div class="account-dropdown__item">
+                                <a href="#">
+                                    <i class="zmdi zmdi-globe"></i>Language</a>
+                            </div>
+                            <div class="account-dropdown__item">
+                                <a href="#">
+                                    <i class="zmdi zmdi-pin"></i>Location</a>
+                            </div>
+                            <div class="account-dropdown__item">
+                                <a href="#">
+                                    <i class="zmdi zmdi-email"></i>Email</a>
+                            </div>
+                            <div class="account-dropdown__item">
+                                <a href="#">
+                                    <i class="zmdi zmdi-notifications"></i>Notifications</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="account-wrap">
+                    <div class="account-item account-item--style2 clearfix js-item-menu">
+                        <div class="image">
+                            <img src="images/icon/avatar-01.jpg" alt="John Doe" />
+                        </div>
+                        <div class="content">
+                            <a class="js-acc-btn" href="#">john doe</a>
+                        </div>
+                        <div class="account-dropdown js-dropdown">
+                            <div class="info clearfix">
+                                <div class="image">
+                                    <a href="#">
+                                        <img src="images/icon/avatar-01.jpg" alt="John Doe" />
+                                    </a>
+                                </div>
+                                <div class="content">
+                                    <h5 class="name">
+                                        <a href="#">john doe</a>
+                                    </h5>
+                                    <span class="email">johndoe@example.com</span>
+                                </div>
+                            </div>
+                            <div class="account-dropdown__body">
+                                <div class="account-dropdown__item">
+                                    <a href="#">
+                                        <i class="zmdi zmdi-account"></i>Account</a>
+                                </div>
+                                <div class="account-dropdown__item">
+                                    <a href="#">
+                                        <i class="zmdi zmdi-settings"></i>Setting</a>
+                                </div>
+                                <div class="account-dropdown__item">
+                                    <a href="#">
+                                        <i class="zmdi zmdi-money-box"></i>Billing</a>
+                                </div>
+                            </div>
+                            <div class="account-dropdown__footer">
+                                <a href="#">
+                                    <i class="zmdi zmdi-power"></i>Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END HEADER MOBILE -->
+
+        <!-- PAGE CONTENT-->
+
+
+
+
+        <div class="page-content--bgf7">
+        <div>
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid" >
+                        <div class="row" style="padding-top: 3%;">
+                            <div class="col-md-12">
+                                <div class="overview-wrap">
+                                    <h2 class="title-1">Add New Order</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row  m-t-25">
+                            <div class="col-md-12">
+                                <div class="card">
+
+                                    <div class="card-body">
+
+                                            <div class="form-group">
+                                                <label for="cc-payment" class="control-label mb-1">Mobile number</label>
+                                                <input id="mobile_number" name="mobile_number" type="text" class="form-control" aria-required="true" aria-invalid="false" value="100.00">
+                                            </div>
+                                            <div class="form-group has-success">
+                                                <label for="cc-name" class="control-label mb-1">Customer Name</label>
+                                                <input id="customer_name" name="customer_name" type="text" class="form-control cc-name valid" data-val="true" data-val-required="Please enter the name on card"
+                                                    autocomplete="cc-name" aria-required="true" aria-invalid="false" aria-describedby="cc-name-error">
+                                                <span class="help-block field-validation-valid" data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                  <div class="col-6">
+                                                    <div class="form-group" class="ui-widget">
+                                                      <label for="cc-exp" class="control-label mb-1" for="tags">Item name</label>
+                                                      <input id="myInput" name="item_name" type="tel" class="form-control cc-exp" value="" data-val="true" data-val-required="Please enter the card expiration"
+                                                          data-val-cc-exp="Please enter a valid month and year" placeholder="Type name to start searching..."
+                                                          autocomplete="cc-exp">
+                                                      <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
+                                                  </div>
+                                                  </div>
+                                                  <div class="col-6">
+                                                      <label for="x_card_code" class="control-label mb-1">Quantity</label>
+                                                      <div class="input-group">
+                                                          <input id="quantity" name="quantity" type="tel" class="form-control cc-cvc" value="" data-val="true" data-val-required="Please enter the security code"
+                                                              data-val-cc-cvc="Please enter a valid security code" autocomplete="off" >
+
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="col-10">
+
+                                                <button type="button" id="add" class="btn btn-success" style="float: right;"  id="addRow" value="Add New Row" onclick="addRow();gettotal()" >Add Item</button>
+
+                                              </div>
+
+                                              <div class="row-6" >
+                                <body align="center" onload="createTable()">
+                                <!--THE CONTAINER WHERE WE'll ADD THE DYNAMIC TABLE-->
+                                <div id="cont"></div>
+
+                              </body>
+                            </div>
+                            <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-app.js"></script>
+
+                          <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-auth.js"></script>
+                          <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-database.js"></script>
+                          <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-firestore.js"></script>
+                          <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-messaging.js"></script>
+                          <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-functions.js"></script>
+                          <script type="javascript">
+                              alert("<%= data.fooditems[1] %>");
+                          </script>
+                            <script>
+                                // ARRAY FOR HEADER.
+
+
+                                var config = {
+                              apiKey: "AIzaSyDfqNXhVbc62NB5otyn_52679JUQ5Rrb64",
+                              authDomain: "cars-8af71.firebaseapp.com",
+                              databaseURL: "https://cars-8af71.firebaseio.com",
+                              projectId: "cars-8af71",
+                              storageBucket: "cars-8af71.appspot.com",
+                              messagingSenderId: "1000709043383"
+                            };
+                            firebase.initializeApp(config);
+
+
+
+
+                                function addRow() {
+                                    alert("herte");
+                                    var empTab = document.getElementById('empTable');
+                                    var itemname = document.getElementById('myInput');
+                                    var quantity = document.getElementById('quantity');
+                                    alert("itemnnnname"+itemname.value);
+                                    var price=1;
+                                    for (var f=0;f<countries.length;f++)
+                                    {
+
+                                      if(countries[f]==itemname.value)
+                                      {
+                                        price= foodprice[f];
+                                      }
+
+                                    }
+
+
+                                    var rowCnt = empTab.rows.length;        // GET TABLE ROW COUNT.
+                                    var tr = empTab.insertRow(rowCnt);      // TABLE ROW.
+                                    tr = empTab.insertRow(rowCnt);
+
+                                    for (var c = 0; c < arrHead.length; c++) {
+                                        var td = document.createElement('td');          // TABLE DEFINITION.
+                                        td = tr.insertCell(c);
+
+                                        if (c == 0) {           // FIRST COLUMN.
+                                            // ADD A BUTTON.
+                                            var button = document.createElement('input');
+
+                                            // SET INPUT ATTRIBUTE.
+                                            button.setAttribute('type', 'button');
+                                            button.setAttribute('value', 'Remove');
+
+                                            // ADD THE BUTTON's 'onclick' EVENT.
+                                            button.setAttribute('onclick', 'removeRow(this)');
+                                            td.appendChild(button);
+                                        }
+                                        else if(c==1){
+                                            // CREATE AND ADD TEXTBOX IN EACH CELL.
+                                            var ele = document.createElement('input');
+                                            ele.setAttribute('type', 'text');
+                                            ele.setAttribute('value',itemname.value);
+                                            td.appendChild(ele);
+                                        }
+                                        else if(c==1){
+                                            // CREATE AND ADD TEXTBOX IN EACH CELL.
+                                            var ele = document.createElement('input');
+                                            ele.setAttribute('type', 'text');
+                                            ele.setAttribute('value',itemname.value);
+                                            td.appendChild(ele);
+                                        }
+                                        else if(c==2)
+                                        {
+                                          var ele = document.createElement('input');
+                                          ele.setAttribute('type', 'text');
+                                          ele.setAttribute('value',quantity.value);
+                                          td.appendChild(ele);
+                                        }
+                                        else {
+                                            var ele = document.createElement('input');
+                                            ele.setAttribute('type', 'text');
+                                            ele.setAttribute('value', price);
+                                            td.appendChild(ele);
+                                        }
+                                    }
+
+                                }
+
+                                // DELETE TABLE ROW.
+                                function removeRow(oButton) {
+                                    var empTab = document.getElementById('empTable');
+                                    empTab.deleteRow(oButton.parentNode.parentNode.rowIndex);       // BUTTON -> TD -> TR.
+                                }
+
+                                // EXTRACT AND SUBMIT TABLE DATA.
+                                var j = 1;
+                                var total =0;
+                                function submit() {
+                                    var myTab = document.getElementById('empTable');
+                                    var values = new Array();
+                                    // LOOP THROUGH EACH ROW OF THE TABLE.
+                                    for (row = 1; row < myTab.rows.length - 1; row++) {
+                                        for (c = 0; c < myTab.rows[row].cells.length; c++) {   // EACH CELL IN A ROW.
+
+                                            var element = myTab.rows.item(row).cells[c];
+                                            if (element.childNodes[0].getAttribute('type') == 'text') {
+                                                values.push("" + element.childNodes[0].value + "");
+                                            }
+                                        }
+
+                                    }
+
+
+                                var reft = firebase.database().ref("/Order/"+document.getElementById("mobile_number").value+'/');
+                                    reft.once("value", function(snapshot) {
+
+                                      snapshot.forEach(function(data) {
+                                      console.log("The " + data.key+"value");
+                                      j = data.key;
+                                      i++;
+                                      j++;
+
+                                      console.log("Value of j is"+j);
+                                    });
+                                    var ref2 = firebase.database().ref('/Order/'+document.getElementById("mobile_number").value+'/'+(""+j)+'/');
+                                    ref2.set({
+                                      customerName:document.getElementById("customer_name").value,
+                                      user_id:document.getElementById("mobile_number").value,
+                                      canteen_id:"canteen001",
+                                      order_id:""+j,
+                                      order_token:0,
+                                      order_time:(new Date()).getDate() + "-"
+                                                    + ((new Date()).getMonth()+1)  + "-"
+                                                      + (new Date()).getFullYear() + " "
+                                                      +(new Date()).getHours() + ":"
+                                                  + (new Date()).getMinutes() ,
+                                      expected_time:0,
+                                      delivery_time:0,
+                                      amout:total
+                                    });
+
+                                    for(var k=0,u=1;k<values.length;k=k+3)
+                                    {
+                                    var rooRef = firebase.database().ref('/Order/'+document.getElementById("mobile_number").value+'/'+j+'/'+'orderItemEntitty'+'/'+u+'/');
+                                    u++;
+                                      rooRef.set({
+                                        itemId:"item"+(u-1),
+                                        itemName: values[k],
+                                        quantity: parseInt(values[k+1]),
+                                        status:1
+                                      });
+
+                                    }
+
+
+
+                                    }, function (errorObject) {
+                                    console.log("The read failed: " + errorObject.code);
+                                    });
+
+
+
+
+
+
+
+                                    //  document.write(j);
+
+                                    i++;
+                                    document.getElementById("mobile_number").value ="";
+                                    document.getElementById("customer_name").value="";
+                                    }
+
+                                    function gettotal()
+                                    {
+                                      total =0;
+                                      var myTab = document.getElementById('empTable');
+                                      var values = new Array();
+                                      // LOOP THROUGH EACH ROW OF THE TABLE.
+                                      for (row = 1; row < myTab.rows.length - 1; row++) {
+                                          for (c = 0; c < myTab.rows[row].cells.length; c++) {   // EACH CELL IN A ROW.
+
+                                              var element = myTab.rows.item(row).cells[c];
+                                              if (element.childNodes[0].getAttribute('type') == 'text') {
+                                                  values.push("" + element.childNodes[0].value + "");
+                                              }
+                                          }
+
+                                      }
+                                      for(var k=0;k<values.length;k=k+3)
+                                      {
+
+                                        total = total + (values[k+1]*values[k+2]);
+
+                                      }
+                                        document.getElementById("total").value = total;
+
+                                    }
+                                  </script>
+                                              <hr>
+                                              <div class="col-10">
+                                            </div>
+                                              <div class="col-6">
+                                                  <label for="x_card_code" class="control-label mb-1">Total</label>
+                                                  <div class="input-group">
+                                                      <input id="total" name="total" type="tel" class="form-control cc-cvc" value="" data-val="true" data-val-required="Please enter the security code"
+                                                          data-val-cc-cvc="Please enter a valid security code" autocomplete="off" >
+
+                                                  </div>
+                                              </div>
+                                              <hr>
+                                              <div>
+
+                                                  <button id="payment-button" type="submit" onclick="submit();" method="get" action="index" class="btn btn-lg btn-info btn-block">
+                                                       <i ></i>&nbsp;
+                                                      <span id="payment-button-amount">Add Order</span>
+                                                      <span id="payment-button-sending" style="display:none;">Sending…</span>
+                                                  </button>
+
+                                              </div>
+
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="vendor/jquery-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    <script src="vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <!-- Vendor JS       -->
+    <script src="vendor/slick/slick.min.js">
+    </script>
+    <script src="vendor/wow/wow.min.js"></script>
+    <script src="vendor/animsition/animsition.min.js"></script>
+    <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    </script>
+    <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="vendor/counter-up/jquery.counterup.min.js">
+    </script>
+    <script src="vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="vendor/select2/select2.min.js">
+    </script>
+
+    <!-- Main JS-->
+    <script src="js/main.js"></script>
+
+
+</body>
+
+</html>
+<!-- end document-->

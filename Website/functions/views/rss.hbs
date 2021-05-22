@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <p id"rss"></p>
+    <script src="/node_modules/rss-parser/dist/rss-parser.min.js"></script>
+<script>
+// String r ="";
+// Note: some RSS feeds can't be loaded in the browser due to CORS security.
+// To get around this, you can use a proxy.
+const CORS_PROXY = "https://cors-anywhere.herokuapp.com/"
+alert("here");
+let parser = new RSSParser();
+parser.parseURL(CORS_PROXY + 'https://www.reddit.com/.rss', function(err, feed) {
+  console.log(feed.title);
+  feed.items.forEach(function(entry) {
+    console.log(entry.title + ':' + entry.link);
+    //r = r+ entry.title;
+    alert("here");
+    //alert(entry.title);
+  })
+})
+ //document.getElementById("rss").value=r;
+</script>
+  </body>
+</html>

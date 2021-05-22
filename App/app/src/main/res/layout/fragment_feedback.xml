@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/transparent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@drawable/solid_rectangle">
+
+        <TextView
+            android:id="@+id/itemName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Veg Fried Rice"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@id/simpleRatingBar"
+            android:layout_marginRight="4dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_centerVertical="true" />
+
+        <com.willy.ratingbar.ScaleRatingBar
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/simpleRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srb_numStars="5"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            app:srb_minimumStars="1"
+            app:srb_rating="0"
+            app:srb_starWidth="20dp"
+            app:srb_starHeight="20dp"
+            app:srb_starPadding="4dp"
+            app:srb_stepSize="1.0"
+            app:srb_isIndicator="false"
+            app:srb_clickable="true"
+            app:srb_scrollable="true"
+            app:srb_clearRatingEnabled="true">
+        </com.willy.ratingbar.ScaleRatingBar>
+
+        <Button
+            android:id="@+id/buttonOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

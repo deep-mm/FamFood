@@ -1,0 +1,28 @@
+{
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "serve": "firebase serve --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "consolidate": "^0.15.1",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.0",
+    "firebase": "^5.8.2",
+    "firebase-admin": "~7.0.0",
+    "firebase-functions": "^2.2.0",
+    "handlebars": "^4.1.0",
+    "heroku": "^7.22.5",
+    "install": "^0.12.2",
+    "node-php": "0.0.1",
+    "php": "0.0.1",
+    "php-node": "0.0.2",
+    "sphp": "^0.6.3"
+  },
+  "private": true
+}

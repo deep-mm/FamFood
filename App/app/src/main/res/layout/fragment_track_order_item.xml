@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content" android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/serialNo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1)"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp" />
+
+    <ImageView
+        android:id="@+id/jain_icon"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:background="@drawable/jain"
+        android:layout_below="@id/serialNo"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/serialNo"
+        android:textSize="14sp"
+        android:text="Veg Fried Rice"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/item_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/status_button"
+        android:layout_alignStart="@id/status_button"
+        android:textColor="@color/nav_blue"
+        android:layout_marginTop="10dp"
+        android:textSize="12sp"
+        android:text="$ 65"/>
+
+
+    <Button
+        android:id="@+id/status_button"
+        android:layout_width="80dp"
+        android:layout_height="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="16dp"
+        android:background="@color/nav_blue"
+        android:text="In delivery"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:textAllCaps="false"
+        android:clickable="false"/>
+
+    <ImageView
+        android:id="@+id/expected_time_icon"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:background="@mipmap/expected_time"
+        android:layout_below="@id/status_button"
+        android:layout_toLeftOf="@id/expected_time"
+        android:layout_marginTop="11dp" />
+
+    <TextView
+        android:id="@+id/expected_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/status_button"
+        android:textSize="10sp"
+        android:layout_alignRight="@id/status_button"
+        android:text="12m"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="2dp"/>
+
+    <TextView
+        android:id="@+id/update_time_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/status_track_view_1"
+        android:layout_alignStart="@id/status_track_view_1"
+        android:text="12:32"
+        android:textSize="10sp"/>
+
+    <ImageView
+        android:id="@+id/greyLine1"
+        android:layout_width="50dp"
+        android:layout_height="5dp"
+        android:layout_marginHorizontal="-10dp"
+        android:background="@drawable/grey_line_horizontal"
+        android:layout_toRightOf="@id/status_track_view_1"
+        android:layout_below="@id/serialNo"
+        android:layout_marginTop="20dp"/>
+
+    <ImageView
+        android:id="@+id/yellowLine1"
+        android:layout_width="50dp"
+        android:layout_height="5dp"
+        android:layout_marginHorizontal="-10dp"
+        android:background="@drawable/yellow_line"
+        android:layout_toRightOf="@id/status_track_view_1"
+        android:layout_below="@id/serialNo"
+        android:layout_marginTop="20dp"/>
+
+    <RelativeLayout
+        android:id="@+id/status_track_view_1"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_below="@id/serialNo"
+        android:layout_alignStart="@id/item_name"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="0dp"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/greyCircle1"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/grey_circle"/>
+
+        <ImageView
+            android:id="@+id/smallYellowCircle1"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/yellow_circle"/>
+
+        <ImageView
+            android:id="@+id/bigYellowCircle1"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:visibility="visible"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/yellow_circle"/>
+
+        <ImageView
+            android:id="@+id/bigRedCircle"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:visibility="invisible"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/red_cricle"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/update_time_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/status_track_view_2"
+        android:layout_toRightOf="@id/greyLine1"
+        android:text="12:32"
+        android:textSize="10sp"/>
+
+    <ImageView
+        android:id="@+id/greyLine2"
+        android:layout_width="50dp"
+        android:layout_height="5dp"
+        android:layout_marginHorizontal="-10dp"
+        android:background="@drawable/grey_line_horizontal"
+        android:layout_toRightOf="@id/status_track_view_2"
+        android:layout_below="@id/serialNo"
+        android:layout_marginTop="20dp"/>
+
+    <ImageView
+        android:id="@+id/yellowLine2"
+        android:layout_width="50dp"
+        android:layout_height="5dp"
+        android:layout_marginHorizontal="-10dp"
+        android:background="@drawable/yellow_line"
+        android:layout_toRightOf="@id/status_track_view_2"
+        android:layout_below="@id/serialNo"
+        android:layout_marginTop="20dp"/>
+
+    <RelativeLayout
+        android:id="@+id/status_track_view_2"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_below="@id/serialNo"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/greyLine1"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/greyCircle2"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/grey_circle"/>
+
+        <ImageView
+            android:id="@+id/smallYellowCircle2"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/yellow_circle"/>
+
+        <ImageView
+            android:id="@+id/bigYellowCircle2"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/yellow_circle"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/update_time_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/status_track_view_2"
+        android:layout_toRightOf="@id/greyLine2"
+        android:text="12:32"
+        android:textSize="10sp"/>
+
+    <ImageView
+        android:id="@+id/greyLine3"
+        android:layout_width="50dp"
+        android:layout_height="5dp"
+        android:layout_marginHorizontal="-10dp"
+        android:background="@drawable/grey_line_horizontal"
+        android:layout_toRightOf="@id/status_track_view_3"
+        android:layout_below="@id/serialNo"
+        android:layout_marginTop="20dp"/>
+
+    <ImageView
+        android:id="@+id/yellowLine3"
+        android:layout_width="50dp"
+        android:layout_height="5dp"
+        android:layout_marginHorizontal="-10dp"
+        android:background="@drawable/yellow_line"
+        android:layout_toRightOf="@id/status_track_view_3"
+        android:layout_below="@id/serialNo"
+        android:layout_marginTop="20dp"/>
+
+    <RelativeLayout
+        android:id="@+id/status_track_view_3"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_below="@id/serialNo"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/greyLine2"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/greyCircle3"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/grey_circle"/>
+
+        <ImageView
+            android:id="@+id/smallYellowCircle3"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/yellow_circle"/>
+
+        <ImageView
+            android:id="@+id/bigYellowCircle3"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/yellow_circle"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/status_track_view_4"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_below="@id/serialNo"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/greyLine3"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/greyCircle4"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/grey_circle"/>
+
+        <ImageView
+            android:id="@+id/smallYellowCircle4"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/yellow_circle"/>
+
+        <ImageView
+            android:id="@+id/bigYellowCircle4"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/yellow_circle"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/update_time_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/status_track_view_2"
+        android:layout_toRightOf="@id/greyLine3"
+        android:text="12:32"
+        android:textSize="10sp"
+        android:layout_marginBottom="8dp"/>
+
+</RelativeLayout>

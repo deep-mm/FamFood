@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/transparent"
+    tools:context=".Activity.FilterActivity"
+    android:id="@+id/popup_window">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:elevation="10dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:background="@drawable/solid_rectangle"
+        android:layout_alignParentRight="true">
+
+        <Switch
+            android:id="@+id/jain_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pure Jain"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:layout_alignStart="@id/time_sort_layout"
+            android:layout_alignEnd="@id/time_sort_layout"
+            android:textColor="@color/editTextColor"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/price_sort_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:layout_alignStart="@id/time_sort_layout"
+            android:layout_alignEnd="@id/time_sort_layout"
+            android:layout_below="@id/jain_switch">
+
+            <ImageView
+                android:id="@+id/price_sort_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/low_high"/>
+
+            <TextView
+                android:id="@+id/price_sort_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginLeft="8dp"
+                android:textColor="@color/editTextColor"
+                android:text="Price"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/time_sort_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:layout_below="@id/price_sort_layout">
+
+            <ImageView
+                android:id="@+id/time_sort_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/low_high"/>
+
+            <TextView
+                android:id="@+id/time_sort_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginLeft="8dp"
+                android:textColor="@color/editTextColor"
+                android:text="Expected Time"/>
+
+        </LinearLayout>
+
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

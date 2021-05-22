@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".Activity.TokenActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/login_page_white_box"
+        android:layout_below="@id/app_bar"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="50dp">
+
+        <TextView
+            android:id="@+id/canteen_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="K.J.Somaiya College of Engineering"
+            android:gravity="center"
+            android:textSize="24sp"
+            android:layout_marginTop="16dp"
+            android:textStyle="italic"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/editTextColor" />
+
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_view_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+
+        <RelativeLayout
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:background="@drawable/token_circle">
+
+            <TextView
+                android:id="@+id/token_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_centerInParent="true"
+                android:text="123"
+                android:textColor="@color/colorAccent"
+                android:textSize="75sp"/>
+
+        </RelativeLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <TextView
+            android:id="@+id/customer_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Deep Mehta"
+            android:textSize="24sp"
+            android:textStyle="italic"
+            android:layout_marginTop="35dp"
+            android:layout_below="@id/shimmer_view_container"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/editTextColor" />
+
+        <TextView
+            android:id="@+id/dateTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/customer_name"
+            android:layout_centerHorizontal="true"
+            android:text="26/11/19 11:53"
+            android:textStyle="italic"
+            android:layout_marginTop="16dp"
+            android:textSize="20sp"/>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

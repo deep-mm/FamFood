@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".Activity.EnterMobile">
+
+    <ImageButton
+        android:id="@+id/back_button"
+        android:layout_width="@dimen/back_button_width"
+        android:layout_height="@dimen/back_button_height"
+        android:layout_marginTop="8dp"
+        android:background="@mipmap/back_button"
+        android:layout_marginLeft="@dimen/back_button_marginLeft"
+        android:clickable="true"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/card_layout_marginTop"
+        android:layout_marginBottom="80dp"
+        android:layout_marginLeft="@dimen/card_layout_marginHorizontal"
+        android:layout_marginRight="@dimen/card_layout_marginHorizontal">
+
+        <ImageView
+            android:id="@+id/otp_box"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/login_page_white_box"
+            android:layout_marginTop="50dp"/>
+
+        <ImageView
+            android:id="@+id/otp_circle"
+            android:layout_width="@dimen/logo_circle_width"
+            android:layout_height="@dimen/logo_circle_height"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/circle_box"/>
+
+        <ImageView
+            android:id="@+id/otp_icon"
+            android:layout_width="@dimen/logo_width"
+            android:layout_height="@dimen/logo_height"
+            android:background="@mipmap/mobile_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/mobile_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mobile_no"
+            android:textColor="@color/colorGreyDark"
+            android:layout_below="@id/otp_circle"
+            android:layout_marginStart="20dp"
+            android:layout_alignStart="@id/otp_box"
+            android:textSize="@dimen/body_text_size" />
+
+        <EditText
+            android:id="@+id/mobileInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/otp_box"
+            android:layout_alignEnd="@id/otp_box"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_below="@id/mobile_text"
+            android:layout_marginTop="4dp"
+            android:textSize="@dimen/body_text_size"
+            android:textColor="@color/editTextColor"
+            android:inputType="phone"/>
+
+        <Button
+            android:id="@+id/send_otp_button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="55dp"
+            android:layout_below="@id/mobileInput"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:background="@drawable/signup_button"
+            android:gravity="center"
+            android:text="@string/otp"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/button_text_size"
+            android:clickable="true"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

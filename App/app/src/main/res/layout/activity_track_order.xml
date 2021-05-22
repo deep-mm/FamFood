@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".Activity.TrackOrder">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:elevation="5dp">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageButton
+                    android:id="@+id/back_button"
+                    android:layout_width="@dimen/back_button_width"
+                    android:layout_height="@dimen/back_button_height"
+                    android:background="@mipmap/back_button"
+                    android:layout_centerVertical="true"/>
+
+                <TextView
+                    android:id="@+id/track_order_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:textColor="@color/colorWhite"
+                    android:text="Track Order"
+                    android:textStyle="bold"
+                    android:layout_centerInParent="true"/>
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/app_bar"
+        android:background="@drawable/login_page_white_box"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="-5dp">
+
+        <TextView
+            android:id="@+id/canteen_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:layout_centerHorizontal="true"
+            android:text="K.J.Somaiya College Of Engineering"
+            android:textColor="@color/black"
+            android:layout_marginTop="12dp"
+            android:ellipsize="end"
+            android:maxLines="1"/>
+
+        <TextView
+            android:id="@+id/order_date_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/canteen_name"
+            android:layout_centerHorizontal="true"
+            android:textSize="16sp"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/black"
+            android:text="Ordered on 12/3/18 at 12.45 pm"/>
+
+
+        <TextView
+            android:id="@+id/items_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Items:"
+            android:layout_below="@id/order_date_time"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp"
+            android:textColor="@color/black"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/items_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_above="@id/total_price_text"
+            android:layout_marginLeft="4dp"
+            android:layout_below="@id/items_title"
+            android:layout_marginBottom="8dp"
+            tools:listitem="@layout/fragment_track_order_item"/>
+
+        <LinearLayout
+            android:id="@+id/token_button"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            android:background="@color/nav_blue"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@mipmap/token_icon"
+                android:rotation="90"/>
+
+            <TextView
+                android:id="@+id/token_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:text="TOKEN"
+                android:layout_marginLeft="8dp"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/delivery_boy_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/token_button"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="16dp"
+            android:gravity="center"
+            android:layout_marginBottom="16dp">
+        
+            <TextView
+                android:id="@+id/delivery_boy_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delivery Boy: "
+                android:textSize="14sp"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/delivery_boy_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Deep Mehta"
+                android:textColor="@color/black"
+                android:layout_marginLeft="2dp"
+                android:textSize="14sp"/>
+
+            <ImageView
+                android:id="@+id/phone_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:background="@mipmap/call_icon"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/total_price_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginBottom="8dp"
+            android:text="Total Price: "
+            android:textColor="@color/black"
+            android:layout_marginLeft="16dp"
+            android:layout_above="@id/delivery_boy_layout"/>
+
+        <TextView
+            android:id="@+id/total_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginBottom="8dp"
+            android:text="$ 32"
+            android:layout_toRightOf="@id/total_price_text"
+            android:textColor="@color/black"
+            android:layout_marginLeft="4dp"
+            android:layout_above="@id/delivery_boy_layout"/>
+
+    </RelativeLayout>
+</RelativeLayout>

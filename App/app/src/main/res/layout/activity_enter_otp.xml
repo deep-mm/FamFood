@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context="com.canteenautomation.famfood.Activity.EnterOtp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/card_layout_marginTop"
+        android:layout_marginBottom="80dp"
+        android:layout_marginLeft="@dimen/card_layout_marginHorizontal"
+        android:layout_marginRight="@dimen/card_layout_marginHorizontal">
+
+        <ImageView
+            android:id="@+id/otp_box"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/login_page_white_box"
+            android:layout_marginTop="50dp"/>
+        <ImageView
+            android:id="@+id/otp_circle"
+            android:layout_width="@dimen/logo_circle_height"
+            android:layout_height="@dimen/logo_circle_width"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/circle_box"/>
+
+        <ImageView
+            android:id="@+id/otp_icon"
+            android:layout_width="@dimen/logo_width"
+            android:layout_height="@dimen/logo_height"
+            android:background="@mipmap/mobile_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/otp_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/otp_circle"
+            android:layout_marginStart="@dimen/card_layout_marginHorizontal"
+            android:layout_marginEnd="@dimen/card_layout_marginHorizontal"
+            android:text="@string/otp_text"
+            android:textAlignment="center"
+            android:textColor="@color/colorGreyDark"
+            android:textSize="@dimen/body_text_size" />
+
+        <ImageButton
+            android:id="@+id/edit_mobile"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/otp_text"
+            android:layout_toEndOf="@id/otp_mobile_text"
+            android:background="@mipmap/edit"
+            android:layout_marginStart="10dp"
+            android:clickable="true"
+             />
+
+        <TextView
+            android:id="@+id/otp_mobile_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/body_text_size"
+            android:layout_below="@id/otp_text"
+            android:layout_centerHorizontal="true"
+            android:text="@string/otp_mobile_sample"/>
+
+        <TextView
+            android:id="@+id/enter_otp_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/otp_mobile_text"
+            android:layout_marginTop="16dp"
+            android:text="@string/otp_code_text"
+            android:textColor="@color/editTextColor"
+            android:textSize="30sp"/>
+
+        <com.alimuzaffar.lib.pin.PinEntryEditText
+            android:id="@+id/pin_blanks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_below="@id/enter_otp_text"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="60dp"
+            android:backgroundTint="@color/colorGreyDark"
+            android:cursorVisible="false"
+            android:digits="1234567890"
+            android:inputType="numberPassword"
+            android:maxLength="6"
+            android:textIsSelectable="false"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:pinLineColors="@color/colorGreyDark"
+            app:pinLineStroke="4dp"
+            app:pinLineStrokeSelected="4dp"
+            android:focusable="true"
+            android:focusedByDefault="true"
+            android:focusableInTouchMode="true"/>
+
+        <TextView
+            android:id="@+id/didntRec_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pin_blanks"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_toStartOf="@id/Resend"
+            android:text="@string/no_otp_text"
+            android:layout_alignStart="@id/otp_box"
+            android:textColor="@color/colorGreyDark"
+            android:textSize="@dimen/body_text_size" />
+
+        <Button
+            android:id="@+id/verify_button"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/didntRec_text"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginRight="24dp"
+            android:background="@drawable/signup_button"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="@string/verify"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/button_text_size" />
+
+        <TextView
+            android:id="@+id/Resend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/didntRec_text"
+            android:layout_alignEnd="@id/otp_box"
+            android:layout_marginEnd="20dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/resend_text"
+            android:textColor="@color/colorOrange"
+            android:textSize="16sp" />
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

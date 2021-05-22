@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".Activity.OrderHistoryDetail">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:elevation="5dp">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageButton
+                    android:id="@+id/back_button"
+                    android:layout_width="@dimen/back_button_width"
+                    android:layout_height="@dimen/back_button_height"
+                    android:background="@mipmap/back_button"
+                    android:layout_centerVertical="true"/>
+
+                <TextView
+                    android:id="@+id/pageTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:textColor="@color/colorWhite"
+                    android:text="Order Details"
+                    android:textStyle="bold"
+                    android:layout_centerInParent="true"/>
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/app_bar">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/order_items"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:paddingBottom="12dp"
+                android:background="@drawable/solid_rectangle">
+
+                <ImageView
+                    android:id="@+id/star_icon"
+                    android:layout_marginTop="12dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginLeft="8dp"
+                    android:background="@drawable/purple_star_icon"/>
+
+                <TextView
+                    android:id="@+id/items_text"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/star_icon"
+                    android:text="@string/items"
+                    android:textColor="@color/editTextColor"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="8dp"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_below="@id/star_icon"
+                    android:id="@+id/order_recycler"
+                    android:layout_marginTop="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/fragment_order_history_item" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@drawable/login_page_white_box"
+                android:layout_below="@id/order_items"
+                android:layout_marginBottom="30dp">
+
+                <ImageView
+                    android:id="@+id/star"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:background="@drawable/purple_star"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="13dp"/>
+
+                <TextView
+                    android:id="@+id/payment_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/payment"
+                    android:textSize="18sp"
+                    android:layout_toEndOf="@id/star"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/editTextColor"/>
+
+                <TextView
+                    android:id="@+id/cart_total_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Order Total"
+                    android:layout_below="@id/payment_text"
+                    android:layout_marginLeft="40dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/editTextColor"
+                    android:layout_marginTop="20dp"/>
+
+                <TextView
+                    android:id="@+id/order_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/payment_text"
+                    android:layout_marginTop="20dp"
+                    android:textSize="16sp"
+                    android:layout_marginRight="40dp"
+                    android:text="450.00"
+                    android:layout_alignParentRight="true"/>
+
+                <TextView
+                    android:id="@+id/taxes_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/cart_total_text"
+                    android:layout_alignStart="@id/cart_total_text"
+                    android:layout_marginTop="8dp"
+                    android:textSize="16sp"
+                    android:text="Taxes"
+                    android:textColor="@color/editTextColor"/>
+
+                <TextView
+                    android:id="@+id/taxes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/order_total"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginTop="8dp"
+                    android:text="45.00"/>
+
+                <TextView
+                    android:id="@+id/coupon_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/taxes_text"
+                    android:layout_alignStart="@id/taxes_text"
+                    android:layout_marginTop="8dp"
+                    android:textSize="16sp"
+                    android:text="Coupon Discount"
+                    android:textColor="@color/editTextColor"/>
+
+                <TextView
+                    android:id="@+id/coupon_disc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/taxes"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginTop="8dp"
+                    android:text="- 45.00"/>
+
+                <TextView
+                    android:id="@+id/total_payable_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/coupon_text"
+                    android:layout_alignStart="@id/coupon_text"
+                    android:layout_marginTop="40dp"
+                    android:textSize="16sp"
+                    android:text="Total Amount"
+                    android:textStyle="bold"
+                    android:textColor="@color/editTextColor"/>
+
+                <TextView
+                    android:id="@+id/total_payable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/coupon_disc"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginTop="40dp"
+                    android:textColor="@color/editTextColor"
+                    android:textStyle="bold"
+                    android:text="450.00"/>
+
+                <Button
+                    android:id="@+id/reorder_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/signup_button"
+                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:layout_marginHorizontal="24dp"
+                    android:layout_below="@id/total_payable_text"
+                    android:layout_marginTop="30dp"
+                    android:text="Re-order"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/register_textsize" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

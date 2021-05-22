@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.canteenautomation.famfood">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/app_icon"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/app_icon"
+        android:largeHeap="true"
+        android:usesCleartextTraffic="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon">
+        
+        <activity android:name=".Activity.FeedbackActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Activity.ReviewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.paytm.pgsdk.PaytmPGActivity"
+            android:configChanges="keyboardHidden|orientation|keyboard"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".Activity.PaytmPayment"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Activity.FilterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.TokenActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.AddNewAddress"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.Address"
+            android:screenOrientation="portrait" />
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="com.google.android.gms.wallet.api.enabled"
+            android:value="true" />
+        <meta-data
+            android:name="google_analytics_adid_collection_enabled"
+            android:value="false" />
+
+        <service
+            android:name=".Utilities.BackgroundService"
+            android:enabled="true" />
+
+        <activity
+            android:name=".Activity.OrderHistoryDetail"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.SignupActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.EnterMobile"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.EnterOtp"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.ChangeCanteenActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.SplashScreen"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activity.ItemActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.TrackOrder"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.CartActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.OrderHistory"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.SearchActivity"
+            android:screenOrientation="portrait" />
+    </application>
+
+</manifest>

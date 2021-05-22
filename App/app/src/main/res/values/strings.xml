@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">FamFood</string>
+    <string name="signup_text">SIGN UP</string>
+    <string name="mobile_no">Mobile No</string>
+    <string name="otp">SEND OTP</string>
+    <string name="verify">VERIFY</string>
+    <string name="login_email_text">Email-Id</string>
+    <string name="login_password_text">Password</string>
+    <string name="login_otp_text">OTP login</string>
+    <string name="login_forgotPassword_text"><u>Forgot Password?</u></string>
+    <string name="login_button_text">LOG IN</string>
+    <string name="login_withoutLogin_text"><i><u>Explore without login</u></i></string>
+    <string name="login_newUser_text">New User?</string>
+    <string name="login_signup_text"><u>Sign Up</u></string>
+    <string name="otp_text">Enter the OTP sent to you on your mobile phone number</string>
+    <string name="otp_mobile_sample">+919004096152</string>
+    <string name="no_otp_text">Didnt receive the OTP?</string>
+    <string name="resend_text"><u>RESEND</u></string>
+    <string name="default_web_client">1000709043383-f2nqc0plu7u9eam8fl9nea0ic5fbc2pt.apps.googleusercontent.com</string>
+    <string name="facebook_app_id">212507056340101</string>
+    <string name="fb_login_protocol_scheme">fb212507056340101</string>
+    <string name="otp_code_text">Enter OTP Code</string>
+    <string name="title_activity_item">ItemActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="famfood">famfood</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="order_number"><b>Order ID:</b></string>
+    <string name="order_date">Date:</string>
+    <string name="order_time">Time:</string>
+    <string name="total_amount">Total Amount:</string>
+    <string name="view_cart"><u><i>View Cart</i></u></string>
+    <string name="items"><u><i>Items</i></u></string>
+    <string name="items_history"><i>Items</i></string>
+    <string name="payment"><u><i>Payment Details</i></u></string>
+    <string name="give_feedback"><u>Give Feedback</u></string>
+    <string name="order_datetime">Ordered on <b>12.3.2019</b> at <b>12:30pm</b></string>
+    <string name="total_price_heading"><i>Total Price</i></string>
+
+</resources>

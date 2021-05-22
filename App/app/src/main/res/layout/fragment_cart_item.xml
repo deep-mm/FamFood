@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="8dp"
+    android:layout_marginLeft="8dp"
+    android:background="@color/transparent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@drawable/solid_rectangle">
+
+        <ImageView
+            android:id="@+id/cart_veg"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/veg"/>
+
+        <Button
+            android:id="@+id/cart_jain"
+            android:layout_width="40dp"
+            android:layout_height="20dp"
+            android:textColor="@color/colorGreen"
+            android:layout_below="@id/quantity_bar"
+            android:layout_alignStart="@id/quantity_bar"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="6dp"
+            android:text="Jain"
+            android:gravity="center"
+            android:textAllCaps="false"
+            android:background="@drawable/solid_rectangle_jain"/>
+
+        <TextView
+            android:id="@+id/cart_food_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_toEndOf="@id/cart_veg"
+            android:layout_marginLeft="16dp"
+            android:textColor="@color/editTextColor"
+            android:background="@android:color/transparent"
+            android:text="Veg Fried Rice"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/cart_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_below="@id/cart_food_text"
+            android:layout_alignStart="@id/cart_food_text"
+            android:background="@android:color/transparent"
+            android:text="RS 65"
+            android:textColor="@color/nav_blue"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:id="@+id/quantity_bar"
+            android:orientation="horizontal"
+            android:layout_width="70dp"
+            android:layout_height="20dp"
+            android:background="@color/colorPrimaryDark"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="12dp">
+
+            <ImageButton
+                android:id="@+id/quantity_sub"
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:background="@mipmap/quant_sub_icon"/>
+
+            <TextView
+                android:id="@+id/quantity"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textSize="12sp"
+                android:gravity="center"
+                android:text="1"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colorWhite"/>
+
+            <ImageButton
+                android:id="@+id/quantity_add"
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="12dp"
+                android:background="@mipmap/quant_add_icon"/>
+
+        </LinearLayout>
+
+        <!--<CheckBox
+            android:id="@+id/jain_check_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/cart_jain"
+            android:layout_below="@id/quantity_bar"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="2dp"
+            android:text="">
+
+        </CheckBox>-->
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

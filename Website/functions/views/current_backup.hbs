@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQuery UI Autocomplete - Default functionality</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- Title Page-->
+    <title>Dashboard 5</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="font-face.css" rel="stylesheet" media="all">
+    <link href="font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="material-design-iconic-font.min.css" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="bootstrap.min.css" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+
+    <!-- Main CSS-->
+    <link href="theme.css" rel="stylesheet" media="all">
+
+
+    <style>
+        table
+        {
+            width: 70%;
+            font: 17px Calibri;
+        }
+        table, th, td
+        {
+            border: solid 1px #DDD;
+            border-collapse: collapse;
+            padding: 2px 3px;
+            text-align: center;
+        }
+    </style>
+    <style>
+    * {box-sizing: border-box;}
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .header {
+      overflow: hidden;
+      background-color: #f1f1f1;
+      padding: 20px 10px;
+    }
+
+    .header a {
+      float: left;
+      color: black;
+      text-align: center;
+      padding: 12px;
+      text-decoration: none;
+      font-size: 18px;
+      line-height: 25px;
+      border-radius: 4px;
+    }
+
+    .header a.logo {
+      font-size: 25px;
+      font-weight: bold;
+    }
+
+    .header a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+
+    .header a.active {
+      background-color: dodgerblue;
+      color: white;
+    }
+
+    .header-right {
+      float: right;
+    }
+
+    @media screen and (max-width: 500px) {
+      .header a {
+        float: none;
+        display: block;
+        text-align: left;
+      }
+
+      .header-right {
+        float: none;
+      }
+    }
+    </style>
+
+</head>
+
+<body class="animsition" onload="createTable()">
+    <div class="page-wrapper">
+      <!-- Header-->
+
+      <div class="header">
+        <img id="current-logo" src="" class="logo" alt="App logo" height="50px" width="50px" style="background-color: white;"/>
+        <div class="header-right">
+          <a class="active" href="#home">Orders</a>
+
+          <a href="#about">Help</a>
+        </div>
+        <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-database.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-messaging.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-functions.js"></script>
+        <script>
+        var config = {
+          apiKey: "AIzaSyDfqNXhVbc62NB5otyn_52679JUQ5Rrb64",
+          authDomain: "cars-8af71.firebaseapp.com",
+          databaseURL: "https://cars-8af71.firebaseio.com",
+          projectId: "cars-8af71",
+          storageBucket: "cars-8af71.appspot.com",
+          messagingSenderId: "1000709043383"
+        };
+        firebase.initializeApp(config);
+
+        var storageRef = firebase.storage().ref();
+          var spaceRef = storageRef.child('canteen001/app/app_logo.png');
+      //    alert(spaceRef);
+          storageRef.child('canteen001/app/app_logo.png').getDownloadURL().then(function(url) {
+              var test = url;
+        //      alert(url);
+              document.getElementById('current-logo').src = test;
+
+          }).catch(function(error) {
+
+          });
+
+
+        </script>
+
+        <!-- PAGE CONTENT-->
+
+
+
+
+        <div class="page-content--bgf7">
+        <div>
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid" >
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="overview-wrap">
+                                    <h2 class="title-1">Current Orders</h2>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row m-t-25">
+                            <div class="col-md-12">
+                                <!-- DATA TABLE-->
+
+
+
+                              <div class="table-responsive m-b-40">
+                                    <table class="table table-borderless table-data3" id="myTable">
+
+                                        <tbody>
+                                          <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-app.js"></script>
+
+                        <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-auth.js"></script>
+                        <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-database.js"></script>
+                        <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-firestore.js"></script>
+                        <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-messaging.js"></script>
+                        <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-functions.js"></script>
+
+                                          <script>
+                                            var config = {
+                                              apiKey: "AIzaSyDfqNXhVbc62NB5otyn_52679JUQ5Rrb64",
+                                              authDomain: "cars-8af71.firebaseapp.com",
+                                              databaseURL: "https://cars-8af71.firebaseio.com",
+                                              projectId: "cars-8af71",
+                                              storageBucket: "cars-8af71.appspot.com",
+                                              messagingSenderId: "1000709043383"
+                                            };
+                                            firebase.initializeApp(config);
+
+
+
+
+                                          var table = document.getElementById("myTable");
+
+
+                                          var ordertoken=[];
+                                          var userid=[];
+                                          var orderid=[];
+                                          var itemnames=[];
+                                          var fprice = [];
+                                          var stat = [];
+                                          var quantity = [];
+                                          var ref = firebase.database().ref("/Order/");
+                                          ref.on("value", function(snapshot) {
+
+                                                  while(table.hasChildNodes())
+                                                  {
+                                          //          alert("In");
+                                                    table.removeChild(table.firstChild);
+                                                  }
+                                          //  alert("first");
+
+                                            //document.write("fff");
+                                            var b=0;
+                                            snapshot.forEach(function(data) {
+
+                                              var ref2 = firebase.database().ref("/Order/"+data.key);
+                                              ref2.once("value",function(snapshot1){
+                                              //  alert("data key"+data.key);
+                                                snapshot1.forEach(function(data1){
+                                                  console.log("next key"+data1.key);
+                                              //    alert("data1 key"+data1.key);
+                                                  var c = data1.val();
+                                                  var customer = c.customerName;
+                                                  var user_id = c.user_id;
+                                                  var order_id = c.order_id;
+                                                  var order_token = c.order_token;
+                                                  var item1;
+                                                  var fprice1;
+                                                  var quantity1;
+                                                  var status1;
+                                              //    alert("length of snapshot"+snapshot1.numChildren());
+                                                  for (var k=0;k<10;k++)
+                                                  {
+
+
+                                                    var ref3 = firebase.database().ref("/Order/"+data.key+"/"+data1.key+"/"+"orderItemEntitty"+"/"+k+"/");
+                                                    ref3.once("value",function(snapshot2){
+                                                    //  alert("item"+k);
+                                                      snapshot2.forEach(function(data2){
+                                                      //  alert("data2      keyy"+data2.key);
+
+                                                        if(data2.key=="itemName")
+                                                        {
+
+                                                          item1 = data2.val();
+                                                      //    alert("aaaaaaaaaaaaaaaaaa"+item1);
+                                                        }
+
+                                                        if(data2.key=="quantity")
+                                                        {
+                                                          quantity1 = data2.val();
+                                                        }
+                                                        if(data2.key=="status")
+                                                        {
+                                                          status1 = data2.val();
+
+                                                          if(status1==1||status1==2)
+                                                          {
+                                                        //    alert("asdsfggfgdfgsgagsgaf");
+                                                            userid[b] = user_id;
+                                                            orderid[b] = order_id;
+                                                            ordertoken[b] =order_token;
+                                                            quantity[b] = quantity1;
+                                                            stat[b] = status1;
+                                                          //  fprice[b] = fprice1;
+                                                            itemnames[b] = item1;
+
+
+                                                        //    alert("aaaaaa"+itemnames[b]+  quantity[b] );
+                                                          //  $("myTable").children().remove()'
+
+
+                                                            var corders;
+                                                          //  for (var o = 0; o < fprice.length; o++) {
+                                                          var o=0;
+                                                        //      alert("length"+quantity.length);
+                                                                corders = {
+                                                                    User_Id:userid[b],
+                                                                    Order_Id:orderid[b],
+                                                                    OrderToken:ordertoken[b],
+                                                                    Item: itemnames[b],
+                                                                    Status:stat[b],
+                                                                    Address:"E/A102",
+                                                                    Quantity:quantity[b]
+                                                                };
+
+                                                                if(b==0)
+                                                                 {
+                                                                 var header = table.createTHead();
+                                                                 var row = header.insertRow(0);
+
+                                                                 var cell3 = row.insertCell(0);
+                                                                 var cell4 = row.insertCell(1);
+                                                                 var cell5 = row.insertCell(2);
+                                                                 var cell6 = row.insertCell(3);
+                                                                 var cell7 = row.insertCell(4);
+
+
+                                                                 cell3.style.color = "white";
+                                                                 cell4.style.color = "white";
+                                                                 cell5.style.color = "white";
+                                                                 cell6.style.color = "white";
+                                                                 cell7.style.color = "white";
+
+
+
+                                                                 cell3.innerHTML = "Order Token";
+                                                                 cell4.innerHTML = "Item Name";
+                                                                 cell5.innerHTML = "Status";
+                                                                 cell6.innerHTML =  "Quatity";
+                                                                 cell7.innerHTML =  "Address";
+
+                                                                 cell3.style.textAlign = "center";
+                                                                 cell4.style.textAlign = "center";
+                                                                 cell5.style.textAlign = "center";
+                                                                 cell6.style.textAlign = "center";
+                                                                 cell7.style.textAlign = "center";
+                                                                }
+
+
+                                                                b++;
+                                                                var row = table.insertRow(b);
+
+                                                                var cell3 = row.insertCell(0);
+                                                                var cell4 = row.insertCell(1);
+                                                                var cell5 = row.insertCell(2);
+                                                                //cell4.id='select';
+                                                                var cell6 = row.insertCell(3);
+                                                                var cell7 = row.insertCell(4);
+                                                                var dropdown="<SELECT id=\"select"+b+"\" onchange=\"GetSelectedTextValue(this)\" class=\"select\" >\n" +
+                                                                    "<OPTION value=\"1\">In Kitchen<\/OPTION>\n" +
+                                                                    "<OPTION value=\"2\">Order Prepared<\/OPTION>\n" +
+                                                                    "<OPTION value=\"3\">Order Ready<\/OPTION>\n" +
+
+                                                                    "<\/SELECT>";
+
+                                                                    row.style.backgroundColor = "white";
+
+
+                                                                cell3.innerHTML = corders.OrderToken;
+                                                                cell4.innerHTML = corders.Item ;
+
+                                                                cell5.innerHTML +=  dropdown;
+                                                                if(corders.Status==2)
+                                                                {
+                                                            //      alert("ddddddddddddddddddddd"+corders.Item);
+                                                                  document.getElementById('select'+b).value = '2';
+                                                                }
+
+
+                                                                cell6.innerHTML = corders.Quantity;
+                                                                cell7.innerHTML = corders.Address;
+
+
+                                                                cell3.style.textAlign = "center";
+                                                                cell4.style.textAlign = "center";
+                                                                cell5.style.textAlign = "center";
+                                                                cell6.style.textAlign = "center";
+                                                                cell7.style.textAlign = "center";
+
+
+                                                          }
+                                                        }
+                                                        if(data2.key=="quantity")
+                                                        {
+
+
+                                                      //    }
+
+
+
+
+                                                        }
+
+
+                                                      //  document.write(data2.val());
+                                                      });
+
+                                                    },function (errorObject) {
+                                                    console.log("The read failed: " + errorObject.code);
+                                                    });
+                                                  }
+                                                });
+
+
+                                              },function (errorObject) {
+                                              console.log("The read failed: " + errorObject.code);
+                                              });
+
+                                          });
+                                        //  table.innerHTML = "";
+
+
+
+                                          }, function (errorObject) {
+                                          console.log("The read failed: " + errorObject.code);
+                                          });
+
+
+
+                                            function GetSelectedTextValue(ddl) {
+                                              //  alert(ddl.selectedIndex);
+                                                var selectedText = ddl.options[ddl.selectedIndex].innerHTML;
+                                                var selectedValue = ddl.value;
+                                              //  alert("Selected Text: " + selectedText + " Value: " + selectedValue);
+
+                                              //  alert( $(this).cell);
+                                                // LOOP THROUGH EACH ROW OF THE TABLE.
+                                              //  alert("rlength"+table.rows.length);
+                                                for (var i = 1, row; row = table.rows[i]; i++) {
+                                                   //iterate through rows
+                                                   //rows would be accessed using the "row" variable assigned in the for loop
+                                                   for (var j = 0, col; col = row.cells[j]; j++) {
+                                                     //iterate through columns
+                                                     if(j==2)
+                                                     {
+                                                       var e = document.getElementById("select"+(i));
+                                                       var strUser = e.options[e.selectedIndex].text;
+                                                    //   alert("in for"+strUser);
+                                                       if(e.options[e.selectedIndex].value == "3")
+                                                       {
+                                                    //     alert("In data");
+
+                                                      //  alert("userid"+userid[i-1]+"orderid"+orderid[i-1]);
+                                                      //  alert("/Orders/"+document.getElementById("myTable").rows[i].cells[0].innerHTML+"/"+"orderItemEntity"+"/");
+                                                         var ref4 = firebase.database().ref("/Order/"+userid[i-1]+"/"+orderid[i-1]+"/"+"orderItemEntitty"+"/");
+                                                         ref4.once("value",function(snapshot){
+                                                           var flag=0;
+                                                           snapshot.forEach(function(data){
+                                                        //      alert("innn"+data.key);
+
+                                                              if(flag==0)
+                                                              {
+                                                              var itemval = data.val();
+                                                              var itemId1 = itemval.itemId;
+                                                              var quantity1 = itemval.quantity;
+                                                              var itemName1 = itemval.itemName;
+                                                              var jain1 = itemval.jain;
+
+                                                            //  alert(itemId1);
+                                                              if(itemName1==document.getElementById("myTable").rows[i].cells[1].innerHTML)
+                                                              {
+                                                          //      alert("inside biggest ac"+"data key"+data.key);
+
+                                                                var ref5 = firebase.database().ref("/Order/"+userid[i-1]+"/"+orderid[i-1]+"/"+"orderItemEntitty"+"/"+data.key+"/");
+                                                                ref5.set({
+                                                                  itemId:itemId1,
+                                                                  itemName:itemName1,
+                                                                  status:3,
+                                                                  jain:jain1,
+                                                                  quantity:quantity1
+                                                                });
+                                                                flag++;
+                                                              }
+
+                                                            }
+                                                           });
+                                                         },function(errorObject){
+                                                           console.log("error");
+                                                         });
+                                                       }
+                                                       if(e.options[e.selectedIndex].value == "2")
+                                                       {
+                                                  //       alert("In data");
+
+                                                    //    alert("userid"+userid[i-1]+"orderid"+orderid[i-1]);
+                                                      //  alert("/Orders/"+document.getElementById("myTable").rows[i].cells[0].innerHTML+"/"+"orderItemEntity"+"/");
+                                                         var ref4 = firebase.database().ref("/Order/"+userid[i-1]+"/"+orderid[i-1]+"/"+"orderItemEntitty"+"/");
+                                                         ref4.once("value",function(snapshot){
+                                                           var flag=0;
+                                                           snapshot.forEach(function(data){
+                                                      //        alert("innn"+data.key);
+
+                                                              if(flag==0)
+                                                              {
+                                                              var itemval = data.val();
+                                                              var itemId1 = itemval.itemId;
+                                                              var quantity1 = itemval.quantity;
+                                                              var itemName1 = itemval.itemName;
+                                                              var jain1 = itemval.jain;
+
+                                                            //  alert(itemId1);
+                                                              if(itemName1==document.getElementById("myTable").rows[i].cells[1].innerHTML)
+                                                              {
+                                                            //    alert("inside biggest ac"+"data key"+data.key);
+
+                                                                var ref5 = firebase.database().ref("/Order/"+userid[i-1]+"/"+orderid[i-1]+"/"+"orderItemEntitty"+"/"+data.key+"/");
+                                                                ref5.set({
+                                                                  itemId:itemId1,
+                                                                  itemName:itemName1,
+                                                                  status:2,
+                                                                  jain:jain1,
+                                                                  quantity:quantity1
+                                                                });
+                                                              }
+                                                              flag++;
+                                                            }
+                                                           });
+                                                         },function(errorObject){
+                                                           console.log("error");
+                                                         });
+                                                       }
+                                                     }
+
+                                                  //   alert(document.getElementById("myTable").rows[i].cells[j].innerHTML);
+                                                   }
+                                                }
+
+
+                                            }
+
+                                            function gettable() {
+                                              var e = document.getElementById("select1");
+                                              var strUser = e.options[e.selectedIndex].text;
+                                          //    alert(strUser);
+                                              //  alert( $(this).cell);
+                                                // LOOP THROUGH EACH ROW OF THE TABLE.
+                                              //  var table = document.getElementById("myTable");
+
+
+
+                                            }
+
+
+                                          </script>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <!-- END DATA TABLE-->
+                            </div>
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="query-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    <script src="popper.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <!-- Vendor JS       -->
+    <script src="slick.min.js">
+    </script>
+    <script src="wow.min.js"></script>
+    <script src="animsition.min.js"></script>
+    <script src="bootstrap-progressbar.min.js">
+    </script>
+    <script src="jquery.waypoints.min.js"></script>
+    <script src="jquery.counterup.min.js">
+    </script>
+    <script src="circle-progress.min.js"></script>
+    <script src="perfect-scrollbar.js"></script>
+    <script src="Chart.bundle.min.js"></script>
+    <script src="select2.min.js">
+    </script>
+
+    <!-- Main JS-->
+    <script src="js/main.js"></script>
+
+
+</body>
+
+</html>
+<!-- end document-->

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+  <meta charset="utf-8">
+  <title>JavaScript program of Quick sort</title>
+  </head>
+  <body></body>
+</html>
+<script>
+function quick_Sort(origArray) {
+	if (origArray.length <= 1) {
+		return origArray;
+	} else {
+
+		var left = [];
+		var right = [];
+		var newArray = [];
+		var pivot = origArray.pop();
+		var length = origArray.length;
+
+		for (var i = 0; i < length; i++) {
+			if (origArray[i] <= pivot) {
+				left.push(i);
+			} else {
+				right.push(i);
+			}
+		}
+
+		return newArray.concat(quick_Sort(left), pivot, quick_Sort(right));
+	}
+}
+
+var myArray = [3, 0, 2, 5, -1, 4, 1 ];
+
+alert("Original array: " + myArray);
+var sortedArray = quick_Sort(myArray);
+alert("Sorted array: " + sortedArray);
+</script>

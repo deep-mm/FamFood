@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>Register</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="font-face.css" rel="stylesheet" media="all">
+    <link href="font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="material-design-iconic-font.min.css" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="bootstrap.min.css" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+
+    <!-- Main CSS-->
+    <link href="theme.css" rel="stylesheet" media="all">
+
+
+</head>
+
+<body class="animsition">
+    <div class="page-wrapper">
+        <div class="page-content--bge5">
+            <div class="container">
+                <div class="login-wrap">
+                    <div class="login-content">
+                        <div class="login-logo">
+                          <img  id="register-logo" src="" alt="App logo" width="100" height="100" style="background-color: white;"/>
+                            </a>
+                        </div>
+                        <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-app.js"></script>
+                        <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+                        <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-auth.js"></script>
+                        <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-database.js"></script>
+                        <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-firestore.js"></script>
+                        <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-messaging.js"></script>
+                        <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-functions.js"></script>
+                        <script>
+                        var config = {
+                          apiKey: "AIzaSyDfqNXhVbc62NB5otyn_52679JUQ5Rrb64",
+                          authDomain: "cars-8af71.firebaseapp.com",
+                          databaseURL: "https://cars-8af71.firebaseio.com",
+                          projectId: "cars-8af71",
+                          storageBucket: "cars-8af71.appspot.com",
+                          messagingSenderId: "1000709043383"
+                        };
+                        firebase.initializeApp(config);
+
+                        var storageRef = firebase.storage().ref();
+                          var spaceRef = storageRef.child('canteen001/app/app_logo.png');
+                      //    alert(spaceRef);
+                          storageRef.child('canteen001/app/app_logo.png').getDownloadURL().then(function(url) {
+                              var test = url;
+                        //      alert(url);
+                              document.getElementById('register-logo').src = test;
+
+                          }).catch(function(error) {
+
+                          });
+
+
+                        </script>
+                        <div class="login-form">
+                            <form action="" method="post">
+                                <div class="form-group">
+                                    <label>Email Address</label>
+                                    <input class="au-input au-input--full" type="email"  name="email" placeholder="Email" onblur="validateEmail(this);">
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input class="au-input au-input--full" type="password" name="password" placeholder="Password">
+                                </div>
+                                <div class="form-group">
+                                    <label>Confirm Password</label>
+                                    <input class="au-input au-input--full" type="password" name="cpassword" placeholder="Confirm Password">
+                                </div>
+
+                                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">register</button>
+
+                            </form>
+                            <script>
+                            function validateEmail(emailField){
+                                var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+                                if (reg.test(emailField.value) == false)
+                                {
+                                    alert('Invalid Email Address');
+                                    return false;
+                                }
+
+                                return true;
+
+                        }
+                        </script>
+                            <div class="register-link">
+                                <p>
+                                    Already have account?
+                                    <a href="/admin_login">Sign In</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="query-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    <script src="popper.min.js"></script>
+    <script src="bootstrap.min.js"></script>
+    <!-- Vendor JS       -->
+    <script src="slick.min.js">
+    </script>
+    <script src="wow.min.js"></script>
+    <script src="animsition.min.js"></script>
+    <script src="bootstrap-progressbar.min.js">
+    </script>
+    <script src="jquery.waypoints.min.js"></script>
+    <script src="jquery.counterup.min.js">
+    </script>
+    <script src="circle-progress.min.js"></script>
+    <script src="perfect-scrollbar.js"></script>
+    <script src="Chart.bundle.min.js"></script>
+    <script src="select2.min.js">
+    </script>
+
+    <!-- Main JS-->
+    <script src="js/main.js"></script>
+
+</body>
+
+</html>
+<!-- end document-->

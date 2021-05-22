@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Dhaval</h1>
+
+    <p id="demo"></p>
+
+    {{#each data}}
+
+      <input type = "text" id = "thingIWant" value ="{{this}}"  />
+    {{/each}}
+    <script>
+      alert(document.getElementById("thingIWant").value);
+      var countries = document.getElementById("thingIWant").value;
+      var c = countries.split(',');
+      alert("countries "+c[1]);
+    </script>
+
+  </body>
+</html>

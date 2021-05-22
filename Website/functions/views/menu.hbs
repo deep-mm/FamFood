@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Menu </title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- Title Page-->
+    <title>Dashboard 5</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="/css/font-face.css" rel="stylesheet" media="all">
+    <link href="/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <!-- Main CSS-->
+    <link href="/css/theme.css" rel="stylesheet" media="all">
+    <link href="/css/menuPage.css" rel="stylesheet" media="all">
+
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-messaging.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-functions.js"></script>
+    <script>
+        var config = {
+            apiKey: "AIzaSyDfqNXhVbc62NB5otyn_52679JUQ5Rrb64",
+            authDomain: "cars-8af71.firebaseapp.com",
+            databaseURL: "https://cars-8af71.firebaseio.com",
+            projectId: "cars-8af71",
+            storageBucket: "cars-8af71.appspot.com",
+            messagingSenderId: "1000709043383"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+</head>
+
+<body class="animsition" onload="createTable()">
+{{#each data}}
+    <input type="hidden" id="thingIWant" value="{{this}}"/>
+{{/each}}
+<div class="page-wrapper">
+    <!-- Header-->
+
+    <div class="header">
+        <img id="menu-logo" src="" class="logo" alt="App logo" height="50px" width="50px"
+             style="background-color: white;"/>
+        <div class="header-right">
+            <a id="home" onclick="redirect()" href="">Home</a>
+            <script>
+                function redirect() {
+                    document.getElementById("home").href = "home" + (window.location.search);
+                }
+            </script>
+            <a class="active" href="/Menu">Change Menu</a>
+            <a  onclick="redirect2()" id="history" href="">Order History</a>
+            <script>
+                function redirect2() {
+                    document.getElementById("history").href = "history" + (window.location.search);
+                }
+            </script>
+
+            <a href="/logout">Logout</a>
+        </div>
+
+        <script>
+            var storageRef = firebase.storage().ref();
+            var spaceRef = storageRef.child('canteen001/app/app_logo.png');
+            //    alert(spaceRef);
+            storageRef.child('canteen001/app/app_logo.png').getDownloadURL().then(function (url) {
+                var test = url;
+                //      alert(url);
+                document.getElementById('menu-logo').src = test;
+
+            }).catch(function (error) {
+
+            });
+        </script>
+    </div>
+    <!-- Header-->
+
+    <!-- PAGE CONTENT-->
+    <script>
+
+        function getinfo() {
+            var i = 0;
+            var ref1 = firebase.database().ref("/Menu/");
+            ref1.on("value", function (snapshot2) {
+
+                var fooditems = [];
+                var price = [];
+                var ref = firebase.database().ref("/Menu/canteen001/");
+                ref.on("value", function (snapshot) {
+                    snapshot.forEach(function (data) {
+                        var ref1 = firebase.database().ref("/Menu/canteen001/" + data.key + "/itemEntities/");
+                        ref1.on("value", function (snapshot1) {
+                            snapshot1.forEach(function (data1) {
+                                var food = data1.val();
+                                fooditems[i] = food.itemName;
+                                if (food.itemName == document.getElementById('iname').value) {
+                                    document.getElementById('expected').value = food.expectedTime;
+                                    document.getElementById('categoryname').value = data.key;
+                                    document.getElementById('eprice').value = food.price;
+                                    document.getElementById('inumber').value = food.itemId;
+                                }
+                                price[i] = food.price;
+                                i++;
+                            });
+                        }, function (errorObject) {
+                            console.log("error");
+                        });
+                    });
+
+                }, function (errorObject) {
+                    console.log("error");
+                });
+                $("#iname").autocomplete({
+                    source: fooditems
+                });
+            }, function (errorObject) {
+                console.log("error");
+            });
+        }
+
+        function getin() {
+            var i = 0;
+
+            var fooditems = [];
+            var price = [];
+            var ref = firebase.database().ref("/Menu/canteen001/");
+            ref.on("value", function (snapshot) {
+                snapshot.forEach(function (data) {
+                    var ref1 = firebase.database().ref("/Menu/canteen001/" + data.key + "/itemEntities/");
+                    ref1.on("value", function (snapshot1) {
+                        snapshot1.forEach(function (data1) {
+                            var food = data1.val();
+                            fooditems[i] = food.itemName;
+
+                            price[i] = food.price;
+                            i++;
+                        });
+                        $("#iname").autocomplete({
+                            source: fooditems
+                        });
+                    }, function (errorObject) {
+                        console.log("error");
+                    });
+                });
+
+            }, function (errorObject) {
+                console.log("error");
+            });
+
+        }
+
+    </script>
+
+    <div class="page-content--bgf7">
+        <div>
+            <div class="section__content section__content--p30">
+                <div class="container-fluid">
+                    <div class="row" style="padding-top: 3%;">
+                        <div class="col-md-12">
+                            <div class="overview-wrap">
+                                <h2 class="title-1">Edit Item(Add item name inorder to edit details)</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row  m-t-25">
+                        <div class="col-md-12">
+                            <div class="card">
+
+                                <div class="card-body">
+
+                                    <div class="form-group">
+                                        <label for="cc-payment" class="control-label mb-1">Category Name</label>
+                                        <input id="categoryname" name="categoryname" type="text" class="form-control"
+                                               aria-required="true" aria-invalid="false" value="">
+                                    </div>
+                                    <div class="form-group has-success">
+
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group" class="ui-widget">
+                                                    <label for="cc-name" class="control-label mb-1">Item Name</label>
+                                                    <input id="iname" name="iname" type="text" autofocus="autofocus"
+                                                           onkeyup="getinfo();" onmousedown="getinfo();"
+                                                           onfocus="getin();" class="form-control cc-name valid"
+                                                           data-val="true"
+                                                           data-val-required="Please enter the name on card"
+                                                           autocomplete="cc-name" aria-required="true"
+                                                           aria-invalid="false" aria-describedby="cc-name-error">
+                                                    <span class="help-block field-validation-valid"
+                                                          data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="x_card_code" class="control-label mb-1"></label>
+                                                <div class="input-group">
+                                                    <label for="cc-name" class="control-label mb-1">Item Number</label>
+                                                    <input id="inumber" name="inumber" type="text"
+                                                           class="form-control cc-name valid" data-val="true"
+                                                           data-val-required="Please enter the name on card"
+                                                           autocomplete="cc-name" aria-required="true"
+                                                           aria-invalid="false" aria-describedby="cc-name-error"
+                                                           readonly>
+                                                    <span class="help-block field-validation-valid"
+                                                          data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group" class="ui-widget">
+                                                <label for="cc-exp" class="control-label mb-1" for="tags">Price</label>
+                                                <input id="eprice" name="eprice" type="tel" class="form-control cc-exp"
+                                                       value="" data-val="true"
+                                                       data-val-required="Please enter the card expiration"
+                                                       data-val-cc-exp="Please enter a valid month and year"
+                                                       placeholder="Type name to start searching..."
+                                                       autocomplete="cc-exp">
+                                                <span class="help-block" data-valmsg-for="cc-exp"
+                                                      data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="x_card_code" class="control-label mb-1"></label>
+                                            <div class="input-group">
+                                                <form>
+                                                    Jain/Non-Jain:
+                                                    <select id="jain1">
+                                                        <option value="">Jain</option>
+                                                        <option value="orange">Non-Jain</option>
+
+                                                    </select>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group" class="ui-widget">
+                                                <label for="cc-exp" class="control-label mb-1" for="tags">Expected
+                                                    Time</label>
+                                                <input id="expected" name="expected" type="tel"
+                                                       class="form-control cc-exp" value="" data-val="true"
+                                                       data-val-required="Please enter the card expiration"
+                                                       data-val-cc-exp="Please enter a valid month and year"
+                                                       placeholder="Type name to start searching..."
+                                                       autocomplete="cc-exp">
+                                                <span class="help-block" data-valmsg-for="cc-exp"
+                                                      data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group" class="ui-widget">
+
+                                                <span class="help-block" data-valmsg-for="cc-exp"
+                                                      data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <script>
+
+                                        function edit() {
+                                            // Initialize Firebase
+                                            var number = 0;
+                                            var ref = firebase.database().ref("/Menu/canteen001/" + document.getElementById("categoryname").value + "/itemEntities/");
+                                            ref.once("value", function (snapshot) {
+
+
+                                                snapshot.forEach(function (data) {
+                                                    //          alert(data.key);
+                                                    var c = data.val();
+
+                                                    if (c.itemId == document.getElementById('inumber').value) {
+                                                        var itemn = c.itemName;
+                                                        var id = c.itemId;
+                                                        var ref3 = firebase.database().ref("/Menu/canteen001/" + document.getElementById("categoryname").value + "/itemEntities/" + (number));
+                                                        var jain1;
+                                                        var e = document.getElementById("jain1");
+                                                        var strUser = e.options[e.selectedIndex].text;
+                                                        if (strUser == "Jain") {
+                                                            jain1 = true;
+                                                        } else {
+                                                            jain1 = false;
+                                                        }
+                                                        ref3.set({
+                                                            expectedTime: document.getElementById("expected").value,
+                                                            filterCategory: 1,
+                                                            itemId: document.getElementById('inumber').value,
+                                                            itemName: document.getElementById("iname").value,
+                                                            jain: jain1,
+                                                            itemPhoto: "http",
+                                                            price: document.getElementById("eprice").value
+                                                        });
+                                                    }
+                                                    number++;
+
+                                                });
+                                                //        alert(number);
+                                            }, function (errorObject) {
+                                                console.log("error");
+                                            });
+                                        }
+                                    </script>
+                                    <hr>
+                                    <div>
+                                        <button id="payment-button" type="submit" onclick="edit()"
+                                                class="btn btn-lg btn-info btn-block">
+                                            <i class=""></i>&nbsp;
+                                            <span id="payment-button-amount">Edit Item</span>
+                                            <span id="payment-button-sending" style="display:none;">Sending…</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-content--bgf7">
+        <div>
+            <div class="section__content section__content--p30">
+                <div class="container-fluid">
+                    <div class="row" style="padding-top: 3%;">
+                        <div class="col-md-12">
+                            <div class="overview-wrap">
+                                <h2 class="title-1">Add New Item</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row  m-t-25">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="cc-payment" class="control-label mb-1">Category Name</label>
+                                        <input id="category" name="category" type="text" class="form-control"
+                                               aria-required="true" aria-invalid="false" value="">
+                                    </div>
+                                    <div class="form-group has-success">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-group" class="ui-widget">
+                                                    <label for="cc-name" class="control-label mb-1">Item Name</label>
+                                                    <input id="itemname" name="itemname" type="text"
+                                                           class="form-control cc-name valid" data-val="true"
+                                                           data-val-required="Please enter the name on card"
+                                                           autocomplete="cc-name" aria-required="true"
+                                                           aria-invalid="false" aria-describedby="cc-name-error">
+                                                    <span class="help-block field-validation-valid"
+                                                          data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="x_card_code" class="control-label mb-1"></label>
+                                                <div class="input-group">
+                                                    <label for="cc-name" class="control-label mb-1">Item Number</label>
+                                                    <input id="itemnumber" name="itemnumber" type="text"
+                                                           class="form-control cc-name valid" data-val="true"
+                                                           data-val-required="Please enter the name on card"
+                                                           autocomplete="cc-name" aria-required="true"
+                                                           aria-invalid="false" aria-describedby="cc-name-error">
+                                                    <span class="help-block field-validation-valid"
+                                                          data-valmsg-for="cc-name" data-valmsg-replace="true"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group" class="ui-widget">
+                                                <label for="cc-exp" class="control-label mb-1" for="tags">Price</label>
+                                                <input id="price" name="price" type="tel" class="form-control cc-exp"
+                                                       value="" data-val="true"
+                                                       data-val-required="Please enter the card expiration"
+                                                       data-val-cc-exp="Please enter a valid month and year"
+                                                       placeholder="Type name to start searching..."
+                                                       autocomplete="cc-exp">
+                                                <span class="help-block" data-valmsg-for="cc-exp"
+                                                      data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="x_card_code" class="control-label mb-1"></label>
+                                            <div class="input-group">
+                                                <form>
+                                                    Jain/Non-Jain:
+                                                    <select id="jain">
+                                                        <option value="">Jain</option>
+                                                        <option value="orange">Non-Jain</option>
+                                                    </select>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group" class="ui-widget">
+                                                <label for="cc-exp" class="control-label mb-1" for="tags">Expected
+                                                    Time</label>
+                                                <input id="expected_time" name="expected_time" type="tel"
+                                                       class="form-control cc-exp" value="" data-val="true"
+                                                       data-val-required="Please enter the card expiration"
+                                                       data-val-cc-exp="Please enter a valid month and year"
+                                                       placeholder="Type name to start searching..."
+                                                       autocomplete="cc-exp">
+                                                <span class="help-block" data-valmsg-for="cc-exp"
+                                                      data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group" class="ui-widget">
+                                              
+                                                <span class="help-block" data-valmsg-for="cc-exp"
+                                                      data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <script>
+                                        // ARRAY FOR HEADER.
+                                        //  var foodprice = [];
+
+                                        //  alert(document.getElementById("thingIWant").value);
+                                        var c = document.getElementById("thingIWant").value;
+                                        var countries = c.split(',');
+                                        //  alert("countries "+countries[1]);
+                                        var availableTags = countries;
+
+
+                                        $("#category").autocomplete({
+                                            source: availableTags
+                                        });
+
+                                        var i = 0;
+                                        var arrHead = new Array();
+                                        arrHead = ['', 'Category', 'Item', 'Price'];      // SIMPLY ADD OR REMOVE VALUES IN THE ARRAY FOR TABLE HEADERS.
+
+                                        // FIRST CREATE A TABLE STRUCTURE BY ADDING A FEW HEADERS AND
+                                        // ADD THE TABLE TO YOUR WEB PAGE.
+                                        // ADD A NEW ROW TO THE TABLE.s
+                                        var selectedfile;
+                                        // EXTRACT AND SUBMIT TABLE DATA.
+
+                                        $("#file").on('change', function (event) {
+
+                                            //    alert("sads")
+                                            selectedfile = event.target.files[0];
+
+                                        });
+
+
+                                        function submit() {
+                                            // Initialize Firebase
+
+                                            var ref = firebase.database().ref("/Menu/canteen001/" + document.getElementById("category").value + "/itemEntities/");
+                                            ref.once("value", function (snapshot) {
+                                                var number = 0;
+
+                                                snapshot.forEach(function (data) {
+                                                    //          alert(data.key);
+                                                    var c = data.val();
+                                                    var id = c.itemId;
+                                                    number++;
+
+
+                                                });
+                                                alert(number);
+                                                var ref3 = firebase.database().ref("/Menu/canteen001/" + document.getElementById("category").value + "/itemEntities/" + (number));
+                                                var jain1;
+                                                var e = document.getElementById("jain");
+                                                var strUser = e.options[e.selectedIndex].text;
+                                                if (strUser == "Jain") {
+                                                    jain1 = true;
+                                                } else {
+                                                    jain1 = false;
+                                                }
+                                                ref3.set({
+                                                    expectedTime: document.getElementById("expected_time").value,
+                                                    filterCategory: 1,
+                                                    itemId: "canteen001_Item_" + document.getElementById("category").value + "_" + document.getElementById('itemnumber').value,
+                                                    itemName: document.getElementById("itemname").value,
+                                                    jain: jain1,
+                                                    itemPhoto: "http",
+                                                    price: document.getElementById("price").value
+                                                });
+                                            }, function (errorObject) {
+                                                console.log("error");
+                                            });
+                                        }
+                                    </script>
+                                    <hr>
+
+                                    <div>
+                                        <button id="payment-button" type="submit" onclick="submit()"
+                                                class="btn btn-lg btn-info btn-block">
+                                            <i class=""></i>&nbsp;
+                                            <span id="payment-button-amount">Add</span>
+                                            <span id="payment-button-sending" style="display:none;">Sending…</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    <!-- Jquery JS-->
+    <script src="/js/query-3.2.1.min.js"></script>
+    <!-- Bootstrap JS-->
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- Vendor JS       -->
+    <script src="/js/slick.min.js">
+    </script>
+    <script src="/js/wow.min.js"></script>
+    <script src="/js/animsition.min.js"></script>
+    <script src="/js/bootstrap-progressbar.min.js">
+    </script>
+    <script src="/js/jquery.waypoints.min.js"></script>
+    <script src="/js/jquery.counterup.min.js">
+    </script>
+    <script src="/js/circle-progress.min.js"></script>
+    <script src="/js/perfect-scrollbar.js"></script>
+    <script src="/js/Chart.bundle.min.js"></script>
+    <script src="/js/select2.min.js">
+    </script>
+
+    <!-- Main JS-->
+    <script src="/js/main.js"></script>
+
+</body>
+
+</html>
+<!-- end document-->

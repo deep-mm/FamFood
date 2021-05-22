@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <style>
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height:800px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#myInput2 {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+</style>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Current Canteen Orders</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- Title Page-->
+
+
+    <!-- Fontfaces CSS-->
+    <link href="/css/font-face.css" rel="stylesheet" media="all">
+    <link href="/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <!-- Main CSS-->
+    <link href="/css/theme.css" rel="stylesheet" media="all">
+    <link href="/css/currentPage.css" rel="stylesheet" media="all">
+
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-messaging.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-functions.js"></script>
+    <script>
+        var config = {
+            apiKey: "AIzaSyDfqNXhVbc62NB5otyn_52679JUQ5Rrb64",
+            authDomain: "cars-8af71.firebaseapp.com",
+            databaseURL: "https://cars-8af71.firebaseio.com",
+            projectId: "cars-8af71",
+            storageBucket: "cars-8af71.appspot.com",
+            messagingSenderId: "1000709043383"
+        };
+        firebase.initializeApp(config);
+    </script>
+</head>
+
+<body class="animsition" onload="createTable()">
+<div class="page-wrapper">
+    <!-- Header-->
+
+    <div class="header">
+        <img id="current-logo" src="" class="logo" alt="App logo" height="50px" width="50px"
+             style="background-color: white;"/>
+        <div class="header-right">
+            <a class="active" href="#home">Orders</a>
+
+            <a href="#about">Help</a>
+        </div>
+
+        <script>
+            var storageRef = firebase.storage().ref();
+            var spaceRef = storageRef.child('canteen001/app/app_logo.png');
+            //    alert(spaceRef);
+            storageRef.child('canteen001/app/app_logo.png').getDownloadURL().then(function (url) {
+                var test = url;
+                //      alert(url);
+                document.getElementById('current-logo').src = test;
+
+            }).catch(function (error) {
+
+            });
+        </script>
+
+        <script>
+        var ordertoken = [];
+        var userid = [];
+        var orderid = [];
+        var itemnames = [];
+        var ordertime=[];
+        var fprice = [];
+        var stat = [];
+        var quantity = [];
+        function createTable(status3,id1)
+        {
+          if(status3!=undefined)
+          {
+        //  alert(status3);
+        //  alert(id1);
+            var table = document.getElementById(id1);
+
+
+
+            var ref = firebase.database().ref("/Order/");
+            ref.on("value", function (snapshot) {
+              ordertoken = [];
+              userid = [];
+              orderid = [];
+              itemnames = [];
+              fprice = [];
+              stat = [];
+              quantity = [];
+              ordertime=[];
+                while (table.hasChildNodes()) {
+                    //          alert("In");
+                    table.removeChild(table.firstChild);
+                }
+                //  alert("first");
+
+                //document.write("fff");
+                var b = 0;
+                snapshot.forEach(function (data) {
+
+                    var ref2 = firebase.database().ref("/Order/" + data.key);
+                    ref2.on("value", function (snapshot1) {
+
+                        //  alert("data key"+data.key);
+                        snapshot1.forEach(function (data1) {
+                            console.log("next key" + data1.key);
+                            //    alert("data1 key"+data1.key);
+                            var c = data1.val();
+                            var customer = c.customerName;
+                            var user_id = c.user_id;
+                            var order_id = c.order_id;
+                            var order_token = c.order_token;
+                            var order_time = c.order_time;
+                            var item1;
+                            var fprice1;
+                            var quantity1;
+                            var status1;
+                            //    alert("length of snapshot"+snapshot1.numChildren());
+                            for (var k = 0; k < 10; k++) {
+
+
+                                var ref3 = firebase.database().ref("/Order/" + data.key + "/" + data1.key + "/" + "orderItemEntitty" + "/" + k + "/");
+                                ref3.once("value", function (snapshot2) {
+                                    //  alert("item"+k);
+                                    snapshot2.forEach(function (data2) {
+                                        //  alert("data2      keyy"+data2.key);
+
+                                        if (data2.key == "itemName") {
+
+                                            item1 = data2.val();
+                                            //    alert("aaaaaaaaaaaaaaaaaa"+item1);
+                                        }
+
+                                        if (data2.key == "quantity") {
+                                            quantity1 = data2.val();
+                                        }
+                                        if (data2.key == "status") {
+                                            status1 = data2.val();
+
+                                            if (status1 == 1|| status1==2) {
+                                            //  alert(status1)
+                                                //    alert("asdsfggfgdfgsgagsgaf");
+                                                userid[b] = user_id;
+                                                orderid[b] = order_id;
+                                                ordertoken[b] = order_token;
+                                                quantity[b] = quantity1;
+                                                stat[b] = status1;
+                                                //  fprice[b] = fprice1;
+                                                itemnames[b] = item1;
+                                                ordertime[b] = order_time;
+
+
+                                              //      alert("aaaaaa"+itemnames[b]+  quantity[b] );
+                                                //  $("myTable").children().remove()'
+
+                                                b++;
+
+
+                                            }
+                                        }
+                                        if (data2.key == "quantity") {
+
+
+                                            //    }
+
+
+                                        }
+
+
+                                        //  document.write(data2.val());
+                                    });
+
+                                }, function (errorObject) {
+                                    console.log("The read failed: " + errorObject.code);
+                                });
+                            }
+                        });
+
+
+                    }, function (errorObject) {
+                        console.log("The read failed: " + errorObject.code);
+                    });
+
+                });
+                //  table.innerHTML = "";
+                var temp1,temp2,temp3,temp4,temp5,temp6,temp7;
+                    for(var i = 0; i < orderid.length; i++) {
+                       for(var j=1; j < (orderid.length-i); j++) {
+                    //     alert(ordertime[j-1].indexOf(":"));
+                    //     var first = ordertime[j-1].indexOf(":");
+                    //     var second = ordertime[j].indexOf(":")
+                          alert("first"+ordertime[j-1].substring(first-2));
+                    //      alert("second"+ordertime[j].substring(second-2));
+                          if((ordertime[j-1])>(ordertime[j]))
+                          {
+                          //  alert("swap");
+                            temp1 = orderid[j-1];
+                            orderid[j-1] = orderid[j];
+                            orderid[j] = temp1;
+                            temp2 = ordertime[j-1];
+                            ordertime[j-1] = ordertime[j];
+                            ordertime[j] = temp2;
+                            temp3 = quantity[j-1];
+                            quantity[j-1] = quantity[j];
+                            quantity[j] = temp3;
+                            temp4 = userid[j-1];
+                            userid[j-1] = userid[j];
+                            userid[j] = temp4;
+                            temp5 = stat[j-1];
+                            stat[j-1] = stat[j];
+                            stat[j] = temp5;
+                            temp6 = itemnames[j-1];
+                            itemnames[j-1] = itemnames[j];
+                            itemnames[j] = temp6;
+                            temp7 = ordertoken[j-1];
+                            ordertoken[j-1] = ordertoken[j];
+                            ordertoken[j] = temp7;
+
+                          }
+                       }
+                    }
+                var corders;
+                var head=0;
+                //  for (var o = 0; o < fprice.length; o++) {
+                 for (var o = 0; o < itemnames.length; o++)
+                 {
+
+                corders = {
+                    User_Id: userid[o],
+                    Order_Id: orderid[o],
+                    OrderToken: ordertoken[o],
+                    Item: itemnames[o],
+                    Status: stat[o],
+                    Address: "E/A102",
+                    Quantity: quantity[o]
+                };
+
+                if (head == 0) {
+                    var header = table.createTHead();
+                    var row = header.insertRow(0);
+
+                    var cell3 = row.insertCell(0);
+                    var cell4 = row.insertCell(1);
+                    var cell5 = row.insertCell(2);
+                    var cell6 = row.insertCell(3);
+                    //       var cell7 = row.insertCell(4);
+
+
+                    cell3.style.color = "white";
+                    cell4.style.color = "white";
+                    cell5.style.color = "white";
+                    cell6.style.color = "white";
+                    //       cell7.style.color = "white";
+
+
+                    cell3.innerHTML = "Token";
+                    cell4.innerHTML = "Item Name";
+                    cell5.innerHTML = "Quantity";
+                    cell6.innerHTML = "Status";
+                    //     cell7.innerHTML =  "Address";
+
+                    cell3.style.textAlign = "left";
+                    cell4.style.textAlign = "left";
+                    cell5.style.textAlign = "left";
+                    cell6.style.textAlign = "left";
+
+                    head++;
+                    //     cell7.style.textAlign = "center";
+                }
+
+
+
+                var row = table.insertRow(o+1);
+
+                var cell3 = row.insertCell(0);
+                var cell4 = row.insertCell(1);
+                var cell5 = row.insertCell(2);
+                //cell4.id='select';
+                var cell6 = row.insertCell(3);
+                //  var cell7 = row.insertCell(4);
+                if(corders.Status==1)
+                {
+                //  alert("status else" +stat[b]);
+                  var dropdown = "<input style=\"width:80px;height:30px;background-color:#BFDB74;\" type=\"button\" id=\"prepared" + status3 + "\" onclick=\"getId2(this)\" value=\"inKitchen\" class=\"prepared1\" >\n" +
+                                "<input style=\"width:80px;height:30px;background-color:#6BBCE9;\" type=\"button\" id=\"prepared" + status3 + "\" onclick=\"getId1(this)\" value=\"Prepared\" class=\"prepared1\" >\n" +
+
+
+                          "<\/input>";
+                }
+                if(corders.Status==2){
+                //  alert("status else" +stat[b]);
+                  var dropdown = "<input style=\"width:80px;height:30px;background-color:#6BBCE9;\" type=\"button\" id=\"prepared" + status3 + "\" onclick=\"getId1(this)\" value=\"Prepared\" class=\"prepared1\" >\n" +
+
+
+
+                          "<\/input>";
+                }
+
+
+
+                row.style.backgroundColor = "white";
+
+
+                cell3.innerHTML = corders.OrderToken;
+                cell4.innerHTML = corders.Item;
+
+                cell6.innerHTML += dropdown;
+            //    document.getElementById('select1' + b).checked = true;
+
+
+
+                cell5.innerHTML = corders.Quantity;
+                //  cell7.innerHTML = corders.Address;
+
+
+                cell3.style.textAlign = "left";
+                cell4.style.textAlign = "left";
+                cell5.style.textAlign = "left";
+                cell6.style.textAlign = "left";
+
+
+                cell3.style.fontSize = "20px";
+                cell4.style.fontSize = "20px";
+                cell5.style.fontSize = "20px";
+                cell6.style.fontSize = "20px";
+                //    cell7.style.textAlign = "center";
+
+                cell3.setAttribute('class','itemname');
+
+              }
+
+            }, function (errorObject) {
+                console.log("The read failed: " + errorObject.code);
+            });
+
+          }
+        }
+        function getId1(element)
+        {
+      //    alert("row" + element.parentNode.parentNode.rowIndex +
+      //    " - column" + element.parentNode.cellIndex);
+          var row = element.parentNode.parentNode.rowIndex;
+          var column = element.parentNode.cellIndex;
+        //  alert(document.getElementById("myTable").rows[row].cells[1].innerHTML);
+      //    alert(document.getElementById("myTable").rows[row].cells[0].innerHTML);
+      //    alert("USER"+ userid[row - 1]);
+          var ref4 = firebase.database().ref("/Order/" + userid[row - 1] + "/" + orderid[row - 1] + "/" + "orderItemEntitty" + "/");
+          ref4.once("value",function(snapshot){
+            var flag = 0;
+            snapshot.forEach(function(data){
+              if (flag == 0) {
+                  var itemval = data.val();
+                  var itemId1 = itemval.itemId;
+                  var quantity1 = itemval.quantity;
+                  var itemName1 = itemval.itemName;
+                  var jain1 = itemval.jain;
+                  var stat=3;
+                  var inKitchen = itemval.inKitchen;
+                  var orderPlaced = itemval.orderPlaced;
+                  var confirmed = itemval.confirmed;
+
+
+                  //  alert(itemId1);
+                  if (itemName1 == document.getElementById("myTable").rows[row].cells[1].innerHTML) {
+                      //      alert("inside biggest ac"+"data key"+data.key);
+                      var data1={0:(new Date().getDate() < 10 ? '0' : '') + new Date().getDate()+"-"
+
+                                + (new Date().getMonth() < 10 ? '0' : '') + (new Date().getMonth()+1)+"-"
+                              + (new Date()).getFullYear() + " " +orderPlaced};
+                      var ref5 = firebase.database().ref("/Order/" + userid[row - 1] + "/" + orderid[row - 1] + "/" + "orderItemEntitty" + "/" + data.key + "/");
+                      ref5.set({
+                          itemId: itemId1,
+                          itemName: itemName1,
+                          status: stat,
+                          jain: jain1,
+                          quantity: quantity1,
+                          inKitchen:inKitchen,
+                          orderPlaced:orderPlaced,
+                          confirmed:confirmed,
+                          prepared: (new Date()).getHours() + ":"+ (new Date()).getMinutes(),
+                          statusUpdateTime:data1
+
+                      });
+                      flag++;
+                  }
+
+              }
+            });
+
+
+          },function(errorObject){
+
+          });
+        }
+
+
+
+
+        function getId2(element)
+        {
+      //    alert("row" + element.parentNode.parentNode.rowIndex +
+      //    " - column" + element.parentNode.cellIndex);
+          var row = element.parentNode.parentNode.rowIndex;
+          var column = element.parentNode.cellIndex;
+      //    alert(document.getElementById("myTable").rows[row].cells[1].innerHTML);
+      //    alert(document.getElementById("myTable").rows[row].cells[0].innerHTML);
+      //    alert("USER"+ userid[row - 1]);
+      //    alert("ORDER"+orderid[row-1]);
+          var ref4 = firebase.database().ref("/Order/" + userid[row - 1] + "/" + orderid[row - 1] + "/" + "orderItemEntitty" + "/");
+
+          ref4.once("value",function(snapshot){
+            var flag = 0;
+            snapshot.forEach(function(data){
+              if (flag == 0) {
+                  var itemval = data.val();
+                  var itemId1 = itemval.itemId;
+                  var quantity1 = itemval.quantity;
+                  var itemName1 = itemval.itemName;
+                  var jain1 = itemval.jain;
+                  var stat=2;
+                  var orderPlaced = itemval.orderPlaced;
+                  var confirmed = itemval.confirmed;
+
+
+                  //  alert(itemId1);
+                  if (itemName1 == document.getElementById("myTable").rows[row].cells[1].innerHTML) {
+                          //= alert("inside biggest ac"+"data key"+data.key);
+                          var data1={0:(new Date().getDate() < 10 ? '0' : '') + new Date().getDate()+"-"
+
+                                    + (new Date().getMonth() < 10 ? '0' : '') + (new Date().getMonth()+1)+"-"
+                                  + (new Date()).getFullYear() + " " +orderPlaced};                      var ref5 = firebase.database().ref("/Order/" + userid[row - 1] + "/" + orderid[row - 1] + "/" + "orderItemEntitty" + "/" + data.key + "/");
+                      ref5.set({
+                          itemId: itemId1,
+                          itemName: itemName1,
+                          status: stat,
+                          jain: jain1,
+                          quantity: quantity1,
+                          orderPlaced:orderPlaced,
+                          confirmed:confirmed,
+                          inKitchen: (new Date()).getHours() + ":"+ (new Date()).getMinutes(),
+                          statusUpdateTime:data1
+                      });
+                      flag++;
+                  }
+
+              }
+            });
+
+
+          },function(errorObject){
+
+          });
+        }
+
+
+
+              function search1() {
+                var input, filter, table, tr, td, i, txtValue;
+               input = document.getElementById("myInput");
+               filter = input.value.toUpperCase();
+               table = document.getElementById("myTable");
+               tr = table.getElementsByTagName("tr");
+               for (i = 0; i < tr.length; i++) {
+                 td = tr[i].getElementsByTagName("td")[0];
+                 if (td) {
+                   txtValue = td.textContent || td.innerText;
+                   if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                     tr[i].style.display = "";
+                   } else {
+                     tr[i].style.display = "none";
+                   }
+                 }
+               }
+            }
+
+
+
+        </script>
+        <script>
+        var ordertoken2 = [];
+        var userid2 = [];
+        var orderid2 = [];
+        var itemnames2 = [];
+        var fprice2 = [];
+        var stat2 = [];
+        var quantity2 = [];
+        var ordertime2 = [];
+        function createTable2()
+        {
+
+
+      //    alert("id1");
+            var table1 = document.getElementById("myTable2");
+
+            var ref = firebase.database().ref("/Order/");
+            ref.on("value", function (snapshot) {
+               ordertoken2 = [];
+               userid2 = [];
+               orderid2 = [];
+               itemnames2 = [];
+               fprice2 = [];
+               stat2 = [];
+               quantity2 = [];
+               ordertime = [];
+              while (table1.hasChildNodes()) {
+                  //          alert("In");
+                  table1.removeChild(table1.firstChild);
+              }
+
+                //  alert("first");
+
+                //document.write("fff");
+                var b = 0;
+                snapshot.forEach(function (data) {
+
+                    var ref2 = firebase.database().ref("/Order/" + data.key);
+                    ref2.on("value", function (snapshot1) {
+                        //  alert("data key"+data.key);
+                        snapshot1.forEach(function (data1) {
+                            console.log("next key" + data1.key);
+                            //    alert("data1 key"+data1.key);
+                            var c = data1.val();
+                            var customer = c.customerName;
+                            var user_id = c.user_id;
+                            var order_id = c.order_id;
+                            var delivery_add = c.delivery_add;
+                            var order_token = c.order_token;
+                            var order_time = c.order_time;
+                            var item1;
+                            var fprice1;
+                            var quantity1;
+                            var status1;
+                            //    alert("length of snapshot"+snapshot1.numChildren());
+                            for (var k = 0; k < 10; k++) {
+
+
+                                var ref3 = firebase.database().ref("/Order/" + data.key + "/" + data1.key + "/" + "orderItemEntitty" + "/" + k + "/");
+                                ref3.once("value", function (snapshot2) {
+                                    //  alert("item"+k);
+                                    snapshot2.forEach(function (data2) {
+                                        //  alert("data2      keyy"+data2.key);
+
+                                        if (data2.key == "itemName") {
+
+                                            item1 = data2.val();
+                                            //    alert("aaaaaaaaaaaaaaaaaa"+item1);
+                                        }
+
+                                        if (data2.key == "quantity") {
+                                            quantity1 = data2.val();
+                                        }
+                                        if (data2.key == "status") {
+                                            status1 = data2.val();
+
+                                            if (status1 == 3 && delivery_add==undefined) {
+
+
+                                                userid2[b] = user_id;
+                                                orderid2[b] = order_id;
+                                                ordertoken2[b] = order_token;
+                                                quantity2[b] = quantity1;
+                                                stat2[b] = status1;
+                                                ordertime2[b] = order_time;
+                                                //  fprice[b] = fprice1;
+                                                itemnames2[b] = item1;
+                                            //    alert("asdsfggfgdfgsgagsgaf "+itemnames2[b]);
+
+
+                                                //    alert("aaaaaa"+itemnames[b]+  quantity[b] );
+                                                //  $("myTable").children().remove()'
+
+
+                                                b++;
+
+                                            }
+                                        }
+                                        if (data2.key == "quantity") {
+
+
+                                            //    }
+
+
+                                        }
+
+
+                                        //  document.write(data2.val());
+                                    });
+
+                                }, function (errorObject) {
+                                    console.log("The read failed: " + errorObject.code);
+                                });
+                            }
+                        });
+
+
+                    }, function (errorObject) {
+                        console.log("The read failed: " + errorObject.code);
+                    });
+
+                });
+                //  table.innerHTML = "";
+              //  alert("thisssssss"+orderid2[0]);
+                var temp1,temp2,temp3,temp4,temp5,temp6,temp7;
+                    for(var i = 0; i < orderid2.length; i++) {
+                       for(var j=1; j < (orderid2.length-i); j++) {
+                      //   alert(ordertime2[j-1].indexOf(":"));
+                         var first = ordertime2[j-1].indexOf(":");
+                         var second = ordertime2[j].indexOf(":")
+                      //    alert("first"+ordertime2[j-1].substring(first-2));
+                      //    alert("second"+ordertime2[j].substring(second-2));
+                          if((ordertime2[j-1])>(ordertime2[j]))
+                          {
+                        //    alert("swap");
+                            temp1 = orderid2[j-1];
+                            orderid2[j-1] = orderid2[j];
+                            orderid2[j] = temp1;
+                            temp2 = ordertime2[j-1];
+                            ordertime2[j-1] = ordertime2[j];
+                            ordertime2[j] = temp2;
+                            temp3 = quantity2[j-1];
+                            quantity2[j-1] = quantity2[j];
+                            quantity2[j] = temp3;
+                            temp4 = userid2[j-1];
+                            userid2[j-1] = userid2[j];
+                            userid2[j] = temp4;
+                            temp5 = stat2[j-1];
+                            stat2[j-1] = stat2[j];
+                            stat2[j] = temp5;
+                            temp6 = itemnames2[j-1];
+                            itemnames2[j-1] = itemnames2[j];
+                            itemnames2[j] = temp6;
+                            temp7 = ordertoken2[j-1];
+                            ordertoken2[j-1] = ordertoken2[j];
+                            ordertoken2[j] = temp7;
+
+                          }
+                       }
+                    }
+                var corders;
+                var head=0;
+            //    alert(itemnames2.length);
+                //  for (var o = 0; o < fprice.length; o++) {
+                for (var o = 0; o < itemnames2.length; o++)
+                {
+
+                //      alert("length"+quantity.length);
+                corders = {
+                    User_Id: userid2[o],
+                    Order_Id: orderid2[o],
+                    OrderToken: ordertoken2[o],
+                    Item: itemnames2[o],
+                    Status: stat2[o],
+                    Address: "E/A102",
+                    Quantity: quantity2[o]
+                };
+
+                if (head == 0) {
+                    var header = table1.createTHead();
+                    var row = header.insertRow(0);
+
+                    var cell3 = row.insertCell(0);
+                    var cell4 = row.insertCell(1);
+                    var cell5 = row.insertCell(2);
+                    var cell6 = row.insertCell(3);
+                    //       var cell7 = row.insertCell(4);
+
+
+                    cell3.style.color = "white";
+                    cell4.style.color = "white";
+                    cell5.style.color = "white";
+                    cell6.style.color = "white";
+                    //       cell7.style.color = "white";
+
+
+                    cell3.innerHTML = "Token";
+                    cell4.innerHTML = "Item Name";
+                    cell5.innerHTML = "Quantity";
+                    cell6.innerHTML = "Status";
+                    //     cell7.innerHTML =  "Address";
+
+                    cell3.style.textAlign = "left";
+                    cell4.style.textAlign = "left";
+                    cell5.style.textAlign = "left";
+                    cell6.style.textAlign = "left";
+
+                    head++;
+                    //     cell7.style.textAlign = "center";
+                }
+
+
+
+                var row = table1.insertRow(o+1);
+
+                var cell3 = row.insertCell(0);
+                var cell4 = row.insertCell(1);
+                var cell5 = row.insertCell(2);
+                //cell4.id='select';
+                var cell6 = row.insertCell(3);
+                //  var cell7 = row.insertCell(4);
+                var dropdown = "<input style=\"width:80px;height:30px;background-color:#E4B589;\" type=\"button\" id=\"prepared" + 2 + "\" onclick=\"myFunction1(this)\" value=\"Delivered\" class=\"prepared2\" >\n" +
+
+
+
+                        "<\/input>";
+
+                          row.style.backgroundColor = "white";
+
+
+                cell3.innerHTML = corders.OrderToken;
+                cell4.innerHTML = corders.Item;
+
+                cell6.innerHTML += dropdown;
+                //    document.getElementById('select1' + b).checked = true;
+
+
+
+                cell5.innerHTML = corders.Quantity;
+                //  cell7.innerHTML = corders.Address;
+
+
+                cell3.style.textAlign = "left";
+                cell4.style.textAlign = "left";
+                cell5.style.textAlign = "left";
+                cell6.style.textAlign = "left";
+
+
+                cell3.style.fontSize = "20px";
+                cell4.style.fontSize = "20px";
+                cell5.style.fontSize = "20px";
+                cell6.style.fontSize = "20px";
+                //    cell7.style.textAlign = "center";
+
+                cell4.setAttribute('class','itemname');
+                cell3.setAttribute('class','ordertoken');
+              }
+
+            }, function (errorObject) {
+                console.log("The read failed: " + errorObject.code);
+            });
+
+        }
+
+        function myFunction1(element) {
+          var row = element.parentNode.parentNode.rowIndex;
+          var column = element.parentNode.cellIndex;
+      //    alert(document.getElementById("myTable2").rows[row].cells[1].innerHTML);
+      //    alert(document.getElementById("myTable").rows[row].cells[0].innerHTML);
+      //   alert("USER"+ userid2[row - 1]);
+      //   alert("ORDER"+orderid2[row-1]);
+      //      var $row = element.closest("tr");    // Find the row
+      //      var item = $row.find(".itemname").text(); // Find the text
+        //    var token = $row.find(".ordertoken").text();
+        //    alert("item"+item);
+        //    alert("token"+token);
+
+        //    alert(ordertoken2.length);
+
+          //      alert("ordertoken"+ordertoken2[i]);
+          //      alert("userid"+userid2[i]);
+          //      alert("orderid"+orderid2[i]);
+
+                var ref4 = firebase.database().ref("/Order/" + userid2[row - 1] + "/" + orderid2[row-1] + "/" + "orderItemEntitty" + "/");
+
+                ref4.once("value",function(snapshot){
+            //      alert("innnnnnnnnnnx");
+                  var flag = 0;
+                  snapshot.forEach(function(data){
+              //      alert("in ssnap");
+                    if (flag == 0) {
+                        var itemval = data.val();
+                        var itemId1 = itemval.itemId;
+                        var quantity1 = itemval.quantity;
+                        var itemName1 = itemval.itemName;
+                        var jain1 = itemval.jain;
+                        var stat=4;
+                        var confirmed = itemval.confirmed;
+                        var orderPlaced = itemval.orderPlaced;
+                        var prepared = itemval.prepared;
+                        var inKitchen = itemval.inKitchen;
+                        //var statusUpdateTime = itemval.statusUpdateTime;
+
+
+                  //        alert(itemId1);
+                        if (itemName1 == document.getElementById("myTable2").rows[row].cells[1].innerHTML) {
+                    //    alert("inside biggest ac"+"data key"+data.key);
+                    var data1={0:(new Date().getDate() < 10 ? '0' : '') + new Date().getDate()+"-"
+
+                              + (new Date().getMonth() < 10 ? '0' : '') + (new Date().getMonth()+1)+"-"
+                            + (new Date()).getFullYear() + " " +orderPlaced};                            var ref5 = firebase.database().ref("/Order/" + userid2[row - 1] + "/" + orderid2[row-1] + "/" + "orderItemEntitty" + "/" + data.key + "/");
+                            ref5.set({
+                                itemId: itemId1,
+                                itemName: itemName1,
+                                orderPlaced:orderPlaced,
+                                confirmed:confirmed,
+                                status: stat,
+                                jain: jain1,
+                                quantity: quantity1,
+                                prepared:prepared,
+                                inKitchen: inKitchen,
+                                delivered: (new Date()).getHours() + ":"+ (new Date()).getMinutes(),
+                                statusUpdateTime:data1
+                            });
+                            flag++;
+                        }
+
+                    }
+                  });
+
+
+                },function(errorObject){
+
+                });
+
+
+            // Let's test it out
+
+
+
+
+
+
+
+        }
+
+        function GetSelectedTextValue(ddl) {
+
+            var selectedText = ddl.options[ddl.selectedIndex].innerHTML;
+            var selectedValue = ddl.value;
+            alert(selectedText);
+            if (selectedText == "All") {
+                selectedText = "";
+            }
+            var table = document.getElementById("myTable");
+
+
+            var ordertoken = [];
+            var userid = [];
+            var orderid = [];
+            var itemnames = [];
+            var fprice = [];
+            var stat = [];
+            var quantity = [];
+            var ref = firebase.database().ref("/Order/");
+            ref.on("value", function (snapshot) {
+
+                while (table.hasChildNodes()) {
+                    //          alert("In");
+                    table.removeChild(table.firstChild);
+                }
+
+                var b = 0;
+                snapshot.forEach(function (data) {
+
+                    var ref2 = firebase.database().ref("/Order/" + data.key);
+                    ref2.once("value", function (snapshot1) {
+                        //  alert("data key"+data.key);
+                        snapshot1.forEach(function (data1) {
+                            console.log("next key" + data1.key);
+                            //    alert("data1 key"+data1.key);
+                            var c = data1.val();
+                            var customer = c.customerName;
+                            var user_id = c.user_id;
+                            var order_id = c.order_id;
+                            var order_token = c.order_token;
+                            var item1;
+                            var itemid1;
+                            var fprice1;
+                            var quantity1;
+                            var status1;
+                            //    alert("length of snapshot"+snapshot1.numChildren());
+                            for (var k = 0; k < 10; k++) {
+
+
+                                var ref3 = firebase.database().ref("/Order/" + data.key + "/" + data1.key + "/" + "orderItemEntitty" + "/" + k + "/");
+                                ref3.once("value", function (snapshot2) {
+                                    //  alert("item"+k);
+                                    snapshot2.forEach(function (data2) {
+                                        //  alert("data2      keyy"+data2.key);
+
+                                        if (data2.key == "itemName") {
+
+                                            item1 = data2.val();
+                                            //    alert("aaaaaaaaaaaaaaaaaa"+item1);
+                                        }
+
+                                        if (data2.key == "quantity") {
+                                            quantity1 = data2.val();
+                                        }
+                                        if (data2.key == "itemId") {
+                                            itemid1 = data2.val();
+                                        }
+                                        if (data2.key == "status") {
+                                            status1 = data2.val();
+
+                                            if (status1 == 1 || status1 == 2) {
+                                                if (itemid1.includes(selectedText)) {
+                                                    //    alert("asdsfggfgdfgsgagsgaf");
+                                                    userid[b] = user_id;
+                                                    orderid[b] = order_id;
+                                                    ordertoken[b] = order_token;
+                                                    quantity[b] = quantity1;
+                                                    stat[b] = status1;
+                                                    //  fprice[b] = fprice1;
+                                                    itemnames[b] = item1;
+
+
+                                                    //    alert("aaaaaa"+itemnames[b]+  quantity[b] );
+                                                    //  $("myTable").children().remove()'
+
+
+                                                    var corders;
+                                                    //  for (var o = 0; o < fprice.length; o++) {
+                                                    var o = 0;
+                                                    //      alert("length"+quantity.length);
+                                                    corders = {
+                                                        User_Id: userid[b],
+                                                        Order_Id: orderid[b],
+                                                        OrderToken: ordertoken[b],
+                                                        Item: itemnames[b],
+                                                        Status: stat[b],
+                                                        Address: "E/A102",
+                                                        Quantity: quantity[b]
+                                                    };
+
+                                                    if (b == 0) {
+                                                        var header = table.createTHead();
+                                                        var row = header.insertRow(0);
+
+                                                        var cell3 = row.insertCell(0);
+                                                        var cell4 = row.insertCell(1);
+                                                        var cell5 = row.insertCell(2);
+                                                        var cell6 = row.insertCell(3);
+                                                        //       var cell7 = row.insertCell(4);
+
+
+                                                        cell3.style.color = "white";
+                                                        cell4.style.color = "white";
+                                                        cell5.style.color = "white";
+                                                        cell6.style.color = "white";
+                                                        //       cell7.style.color = "white";
+
+
+                                                        cell3.innerHTML = "Order Token";
+                                                        cell4.innerHTML = "Item Name";
+                                                        cell5.innerHTML = "Status";
+                                                        cell6.innerHTML = "Quatity";
+                                                        //     cell7.innerHTML =  "Address";
+
+                                                        cell3.style.textAlign = "center";
+                                                        cell4.style.textAlign = "center";
+                                                        cell5.style.textAlign = "center";
+                                                        cell6.style.textAlign = "center";
+                                                        //     cell7.style.textAlign = "center";
+
+
+                                                    }
+
+
+                                                    b++;
+                                                    var row = table.insertRow(b);
+
+                                                    var cell3 = row.insertCell(0);
+                                                    var cell4 = row.insertCell(1);
+                                                    var cell5 = row.insertCell(2);
+                                                    //cell4.id='select';
+                                                    var cell6 = row.insertCell(3);
+                                                    //  var cell7 = row.insertCell(4);
+                                                    var dropdown = "<input style=\"width:15px;height:15px;\" type=\"checkbox\" id=\"select1" + b + "\" onclick=\"myFunction()\"  class=\"select\" >In kitchen\n" +
+                                                            "<input style=\"width:15px;height:15px;\" type=\"checkbox\" id=\"select2" + b + "\" onclick=\"myFunction()\" class=\"select\" >Order Prepared\n" +
+                                                            "<input style=\"width:15px;height:15px;\" type=\"checkbox\" id=\"select3" + b + "\" onclick=\"myFunction()\" class=\"select\" >Order ready \n" +
+
+
+                                                            "<\/SELECT>";
+
+                                                    row.style.backgroundColor = "white";
+
+
+                                                    cell3.innerHTML = corders.OrderToken;
+                                                    cell4.innerHTML = corders.Item;
+
+                                                    cell5.innerHTML += dropdown;
+                                                    document.getElementById('select1' + b).checked = true;
+                                                    if (corders.Status == 2) {
+                                                        document.getElementById('select2' + b).checked = true;
+
+                                                    }
+                                                    if (corders.Status == 3) {
+                                                        document.getElementById('select3' + b).checked = true;
+
+                                                    }
+
+
+                                                    cell6.innerHTML = corders.Quantity;
+                                                    //  cell7.innerHTML = corders.Address;
+
+
+                                                    cell3.style.textAlign = "center";
+                                                    cell4.style.textAlign = "center";
+                                                    cell5.style.textAlign = "center";
+                                                    cell6.style.textAlign = "center";
+                                                    //    cell7.style.textAlign = "center";
+                                                    cell3.style.fontSize = "20px";
+                                                    cell4.style.fontSize = "20px";
+                                                    cell5.style.fontSize = "20px";
+                                                    cell6.style.fontSize = "20px";
+
+                                                }
+                                            }
+                                        }
+
+                                        //  document.write(data2.val());
+                                    });
+
+                                }, function (errorObject) {
+                                    console.log("The read failed: " + errorObject.code);
+                                });
+                            }
+                        });
+
+
+                    }, function (errorObject) {
+                        console.log("The read failed: " + errorObject.code);
+                    });
+
+                });
+                //  table.innerHTML = "";
+
+
+            }, function (errorObject) {
+                console.log("The read failed: " + errorObject.code);
+            });
+
+
+          }
+              function search() {
+              var input, filter, table, tr, td, i, txtValue;
+              input = document.getElementById("myInput2");
+              filter = input.value.toUpperCase();
+              table = document.getElementById("myTable2");
+              tr = table.getElementsByTagName("tr");
+              for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                  txtValue = td.textContent || td.innerText;
+                  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                  } else {
+                    tr[i].style.display = "none";
+                  }
+                }
+              }
+            }
+        </script>
+
+
+        <!-- PAGE CONTENT-->
+
+        <div class="page-content--bgf7">
+            <div>
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                      <div class="row">
+                          <div class="col-md-12">
+                              <div class="overview-wrap">
+                                  <h2 class="title-1">Current Orders</h2>
+                              </div>
+                          </div>
+                      </div>
+
+
+                      <div class="row">
+                      <div class="column" style="background-color:#F1F1F1;">
+                          <input type="text" id="myInput" onkeyup="search1()" placeholder="Search for Tokens.." title="Type in a name">
+                        <div class="table-responsive m-b-40">
+                        <table class="table table-borderless table-data3" id="myTable">
+                        <tbody>
+                          <script>
+                          createTable(1,"myTable");
+                          </script>
+                        </tbody>
+                        </table>
+
+                      </div>
+                      </div>
+                      <div class="column" style="background-color:#F1F1F1;">
+                        <input type="text" id="myInput2" onkeyup="search()" placeholder="Search for Tokens.." title="Type in a name">
+                        <div class="table-responsive m-b-40">
+                        <table class="table table-borderless table-data3" id="myTable2">
+                        <tbody>
+                          <script>
+                          createTable2();
+                          </script>
+                        </tbody>
+                        </table>
+
+                    </div>
+                      </div>
+                    </div>
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <!-- Jquery JS-->
+        <script src="/js/query-3.2.1.min.js"></script>
+        <!-- Bootstrap JS-->
+        <script src="/js/popper.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <!-- Vendor JS       -->
+        <script src="/js/slick.min.js">
+        </script>
+        <script src="/js/wow.min.js"></script>
+        <script src="/js/animsition.min.js"></script>
+        <script src="/js/bootstrap-progressbar.min.js">
+        </script>
+        <script src="/js/jquery.waypoints.min.js"></script>
+        <script src="/js/jquery.counterup.min.js">
+        </script>
+        <script src="/js/circle-progress.min.js"></script>
+        <script src="/js/perfect-scrollbar.js"></script>
+        <script src="/js/Chart.bundle.min.js"></script>
+        <script src="/js/select2.min.js">
+        </script>
+
+        <!-- Main JS-->
+        <script src="/js/main.js"></script>
+
+
+</body>
+
+</html>
+<!-- end document-->

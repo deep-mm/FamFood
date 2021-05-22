@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Home </title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- Fontfaces CSS-->
+    <link href="/css/font-face.css" rel="stylesheet" media="all">
+    <link href="/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" media="all">
+
+    <!-- Vendor CSS-->
+    <!-- Main CSS-->
+    <link href="/css/theme.css" rel="stylesheet" media="all">
+    <link href="/css/index4Style.css" rel="stylesheet" media="all">
+
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-messaging.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.8.0/firebase-functions.js"></script>
+
+    <script>
+        var config = {
+            apiKey: "AIzaSyDfqNXhVbc62NB5otyn_52679JUQ5Rrb64",
+            authDomain: "cars-8af71.firebaseapp.com",
+            databaseURL: "https://cars-8af71.firebaseio.com",
+            projectId: "cars-8af71",
+            storageBucket: "cars-8af71.appspot.com",
+            messagingSenderId: "1000709043383"
+        };
+        firebase.initializeApp(config);
+
+        var i = 0;
+        var arrHead = new Array();
+        arrHead = ['', 'Item Name', 'Quantity', 'Price'];
+        // SIMPLY ADD OR REMOVE VALUES IN THE ARRAY FOR TABLE HEADERS.
+
+        // FIRST CREATE A TABLE STRUCTURE BY ADDING A FEW HEADERS AND
+        // ADD THE TABLE TO YOUR WEB PAGE.
+        function createTable() {
+
+            var empTable = document.createElement('table');
+            empTable.setAttribute('id', 'empTable');            // SET THE TABLE ID.
+
+            var tr = empTable.insertRow(-1);
+
+            for (var h = 0; h < arrHead.length; h++) {
+                var th = document.createElement('th');          // TABLE HEADER.
+                th.innerHTML = arrHead[h];
+                tr.appendChild(th);
+            }
+
+            var div = document.getElementById('cont');
+            div.appendChild(empTable);    // ADD THE TABLE TO YOUR WEB PAGE.
+        }
+
+    </script>
+    <style>
+    /* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+* {
+  box-sizing: border-box;
+}
+
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+  height:800px; /* Should be removed. Only for demonstration */
+}
+.column1 {
+  float: right;
+  width: 50%;
+  padding: 10px;
+  height:800px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#myInput2 {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+    </style>
+
+</head>
+
+<body class="animsition" onload="createTable()">
+{{#each data}}
+
+    <input type="hidden" id="thingIWant" value="{{this}}"/>
+{{/each}}
+{{#each data1}}
+
+    <input type="hidden" id="thingIWant1" value="{{this}}"/>
+{{/each}}
+<div class="page-wrapper">
+
+
+    <!-- PAGE CONTENT-->
+    <!-- Header-->
+
+    <div class="header">
+        <img id="index-logo" src="" class="logo" alt="App logo" height="50px" width="50px"
+             style="background-color: white;"/>
+        <div class="header-right">
+            <a class="active" href="#home">Home</a>
+            <a id="Menu" onclick="redirect()" href="">Change Menu</a>
+            <script>
+                function redirect() {
+                    document.getElementById("Menu").href = "Menu" + (window.location.search);
+                }
+            </script>
+            <a href="/history">Order History</a>
+            <a href="#about">Help</a>
+            <a href="/logout">Logout</a>
+        </div>
+
+        <script>
+            var storageRef = firebase.storage().ref();
+            var spaceRef = storageRef.child('canteen001/app/app_logo.png');
+            //    alert(spaceRef);
+            storageRef.child('canteen001/app/app_logo.png').getDownloadURL().then(function (url) {
+                var test = url;
+                //      alert(url);
+                document.getElementById('index-logo').src = test;
+
+            }).catch(function (error) {
+
+            });
+        </script>
+
+    </div>
+
+    <!-- Header-->
+    <div class="page-content--bgf7">
+        <div>
+            <div class="section__content section__content--p30">
+                <div class="container-fluid">
+                    <div class="row" style="padding-top: 3%;">
+                        <div class="col-md-12">
+                            <div class="overview-wrap">
+                                <h2 class="title-1">Add New Order</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row  m-t-25">
+                        <div class="col-md-12">
+                            <div class="card">
+
+                                <div class="card-body">
+
+                                    <div class="form-group">
+
+                                        <input id="mobile_number" value="9999999999" name="mobile_number" type="hidden" class="form-control"
+                                               aria-required="true" aria-invalid="false" value="">
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="autocomplete" class="ui-widget">
+                                                <label for="cc-exp" class="control-label mb-1" for="tags">Item name</label>
+                                                <input id="myInput" name="myCountry" type="text"
+                                                       class="form-control cc-exp" value="" data-val="true"
+                                                       data-val-required="Please enter the card expiration"
+                                                       data-val-cc-exp="Please enter a valid month and year"
+                                                       placeholder="Type name to start searching..."
+                                                       autocomplete="cc-exp">
+
+
+                                                <span class="help-block" data-valmsg-for="cc-exp"
+                                                      data-valmsg-replace="true"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="x_card_code" class="control-label mb-1">Quantity</label>
+                                            <div class="input-group">
+                                                <input id="quantity" name="quantity" type="tel"
+                                                       class="form-control cc-cvc" value="" data-val="true"
+                                                       data-val-required="Please enter the security code"
+                                                       data-val-cc-cvc="Please enter a valid security code"
+                                                       autocomplete="off">
+
+                                            </div>
+                                            <br>
+                                        </div>
+
+                                        <div>
+
+                                        </div>
+
+                                        <br>
+                                        <br>
+                                        <div class="col-md-12">
+
+                                            <button type="button" id="add" class="btn btn-success" style="float: right;"
+                                                    id="addRow" value="Add New Row" onclick="addRow();gettotal()">Add
+                                                Item
+                                            </button>
+
+                                        </div>
+                                        <br>
+                                        <br>
+                                    </div>
+
+
+                                    <div class="row-6">
+                                        <body align="center" onload="createTable()">
+
+                                        <div>
+
+                                            <div id="cont"></div>
+                                        </div>
+
+                                        </body>
+
+                                        <script>
+                                      //        alert(document.getElementById("thingIWant").value);
+                                            var c = document.getElementById("thingIWant").value;
+                                            var countries = c.split(',');
+                                        //      alert("countries "+countries[1]);
+
+                                          //    alert(document.getElementById("thingIWant1").value);
+                                            var p = document.getElementById("thingIWant1").value;
+                                            var price = p.split(',');
+                                            //  alert("price "+price[1]);
+
+                                            // ADD A NEW ROW TO THE TABLE.s
+                                            $("#myInput").autocomplete({
+                                                source: countries
+                                            });
+
+                                            var foodprice = price;
+
+
+                                            var flag = 0;
+
+                                            function addRow() {
+                                                var empTab = document.getElementById('empTable');
+                                                var itemname = document.getElementById('myInput');
+                                                var quantity = document.getElementById('quantity');
+                                                var number = "9999999999";
+                                                if (number.value == "") {
+                                                    window.alert("Error: Cell number must not be null.");
+
+                                                    return false;
+                                                } else if (number.length != 10) {
+                                                    window.alert("Phone number must be 10 digits.");
+
+                                                } else if ((document.getElementById('quantity').value.length == 0)) {
+                                                    alert("Please Enter valid quantity");
+                                                } else if ((document.getElementById('myInput').value.length == 0)) {
+                                                    alert("Please Enter valid item");
+                                                } else {
+
+                                                    //    alert("itemnnnname"+itemname);
+                                                    var price = 1;
+                                                    for (var f = 0; f < countries.length; f++) {
+
+                                                        if (countries[f] == itemname.value) {
+                                                            price = foodprice[f];
+                                                        }
+
+                                                    }
+
+
+                                                    var rowCnt = empTab.rows.length;        // GET TABLE ROW COUNT.
+                                                    var tr = empTab.insertRow(rowCnt);      // TABLE ROW.
+                                                    tr = empTab.insertRow(rowCnt);
+
+                                                    for (var c = 0; c < arrHead.length; c++) {
+                                                        var td = document.createElement('td');          // TABLE DEFINITION.
+                                                        td = tr.insertCell(c);
+
+                                                        if (c == 0) {           // FIRST COLUMN.
+                                                            // ADD A BUTTON.
+                                                            var button = document.createElement('input');
+
+                                                            // SET INPUT ATTRIBUTE.
+                                                            button.setAttribute('type', 'button');
+                                                            button.setAttribute('value', 'Remove');
+
+                                                            // ADD THE BUTTON's 'onclick' EVENT.
+                                                            button.setAttribute('onclick', 'removeRow(this)');
+                                                            td.appendChild(button);
+                                                        } else if (c == 1) {
+                                                            // CREATE AND ADD TEXTBOX IN EACH CELL.
+                                                            var ele = document.createElement('input');
+                                                            ele.setAttribute('type', 'text');
+                                                            ele.setAttribute('value', itemname.value);
+                                                            td.appendChild(ele);
+                                                        } else if (c == 2) {
+                                                            var ele = document.createElement('input');
+                                                            ele.setAttribute('type', 'text');
+                                                            ele.setAttribute('value', quantity.value);
+                                                            td.appendChild(ele);
+                                                        } else {
+                                                            var ele = document.createElement('input');
+                                                            ele.setAttribute('type', 'text');
+                                                            ele.setAttribute('value', price);
+                                                            td.appendChild(ele);
+                                                        }
+                                                    }
+                                                    document.getElementById("myInput").value = "";
+
+                                                    document.getElementById("quantity").value = "";
+                                                }
+                                                document.getElementById("cont").style.overflowX = "scroll";
+                                            }
+
+                                            // DELETE TABLE ROW.
+                                            function removeRow(oButton) {
+                                                var empTab = document.getElementById('empTable');
+                                                empTab.deleteRow(oButton.parentNode.parentNode.rowIndex);       // BUTTON -> TD -> TR.
+                                                gettotal();
+                                            }
+
+                                            // EXTRACT AND SUBMIT TABLE DATA.
+                                            var j = 1;
+                                            var total = 0;
+
+                                            function submit() {
+                                              var token1;
+
+                                              if(document.getElementById("mobile_number").value!="")
+                                              {
+                                            //    alert("Innnnn");
+                                              var token;
+                                              var Mobile = document.getElementById("mobile_number").value;
+                                              var orderid = ("Order_" + (new Date().getDate() < 10 ? '0' : '') + new Date().getDate()+""
+
+                                                        + (new Date().getMonth() < 10 ? '0' : '') + (new Date().getMonth()+1)+""
+                                                      + (new Date()).getFullYear() + ""
+
+                                                      + (new Date().getHours() < 10 ? '0' : '') + new Date().getHours()+""
+                                                      + (new Date().getMinutes() < 10 ? '0' : '') + new Date().getMinutes()+ (new Date().getSeconds() < 10 ? '0' : '') + new Date().getSeconds() + "_" + Mobile);
+                                                      var reftoken = firebase.database().ref("/Canteens/canteen001/activeTokenEntity/");
+                                                      reftoken.once('value',function(snapshot7){
+                                                      snapshot7.forEach(function(data7){
+                                                      token = data7.val();
+                                                      token1 = data7.val();
+                                                      var myTab = document.getElementById('empTable');
+                                                      var values = new Array();
+                                                      // LOOP THROUGH EACH ROW OF THE TABLE.
+                                                      for (row = 1; row < myTab.rows.length - 1; row++) {
+                                                          for (c = 0; c < myTab.rows[row].cells.length; c++) {   // EACH CELL IN A ROW.
+
+                                                              var element = myTab.rows.item(row).cells[c];
+                                                              if (element.childNodes[0].getAttribute('type') == 'text') {
+                                                                  values.push("" + element.childNodes[0].value + "");
+                                                              }
+                                                          }
+
+                                                      }
+
+                                                      var flag = 0;
+                                                    //  alert(orderid);
+                                                      var reft = firebase.database().ref("/Order/" + Mobile+ '/');
+                                                      reft.once("value", function (snapshot) {
+
+                                                          snapshot.forEach(function (data) {
+                                                              console.log("The " + data.key + "value");
+                                                              j = data.key;
+                                                              i++;
+                                                              j++;
+
+                                                              console.log("Value of j is" + j);
+                                                          });
+
+                                                          for (var k = 0, u = 1; k < 1; k = k + 3) {
+                                                            var ref2 = firebase.database().ref('/Order/' + Mobile + '/' + orderid + '/');
+                                                          //  alert("innnnn"+u);
+                                                            ref2.set({
+
+                                                                user_id: document.getElementById("mobile_number").value,
+                                                                canteen_id: "canteen001",
+                                                                order_id: orderid,
+                                                                order_token: token1,
+                                                                order_time: (new Date().getDate() < 10 ? '0' : '') + new Date().getDate()+"-"
+
+                                                                          + (new Date().getMonth() < 10 ? '0' : '') + (new Date().getMonth()+1)+"-"
+                                                                        + (new Date()).getFullYear() + " "
+
+                                                                        + (new Date().getHours() < 10 ? '0' : '') + new Date().getHours()+":"
+                                                                        + (new Date().getMinutes() < 10 ? '0' : '') + new Date().getMinutes(),
+                                                                expected_time: 0,
+                                                                delivery_time: 0,
+                                                                amout: total
+                                                            });
+                                                            for(l=0;l<values.length;l=l+3)
+                                                            {
+                                                              var c = l;
+                                                              c = c/3;
+                                                              var rooRef = firebase.database().ref('/Order/' + Mobile + '/' +orderid + '/' + 'orderItemEntitty' + '/' + c + '/');
+
+                                                              rooRef.set({
+                                                                  itemId: "item" + (c),
+                                                                  itemName: values[l],
+                                                                  quantity: parseInt(values[l + 1]),
+                                                                  jain: "false",
+                                                                  status: 1,
+                                                                  confirmed:(new Date().getHours() < 10 ? '0' : '') + new Date().getHours()+":"
+                                                                  + (new Date().getMinutes() < 10 ? '0' : '') + new Date().getMinutes(),
+                                                                  orderPlaced:(new Date().getHours() < 10 ? '0' : '') + new Date().getHours()+":"
+                                                                  + (new Date().getMinutes() < 10 ? '0' : '') + new Date().getMinutes()
+                                                              });
+
+                                                              }
+                                                          }
+
+
+                                                      }, function (errorObject) {
+                                                          console.log("The read failed: " + errorObject.code);
+                                                      });
+
+
+                                                      //  document.write(j);
+
+                                                      i++;
+
+                                                      var tableHeaderRowCount = 1;
+                                                        var table = document.getElementById('empTable');
+                                                        var rowCount = table.rows.length;
+                                                        for (var i = tableHeaderRowCount; i < rowCount; i++) {
+                                                            table.deleteRow(tableHeaderRowCount);
+                                                        }
+                                                      gettotal();
+                                                    //  alert("Token Number"+token);
+                                                      tokenmodal(token);
+                                                    if(token==999)
+                                                    {
+                                                      token=0;
+                                                    }
+                                                    var refsettoken= firebase.database().ref("/Canteens/canteen001/activeTokenEntity/");
+                                                    refsettoken.set({
+                                                      activeToken:token+1
+                                                    });
+
+                                                });
+                                              },function(errorObject){
+
+                                              });
+                                            }
+                                            }
+
+                                            function gettotal() {
+                                                total = 0;
+                                                var myTab = document.getElementById('empTable');
+                                                var values = new Array();
+                                                // LOOP THROUGH EACH ROW OF THE TABLE.
+                                                for (row = 1; row < myTab.rows.length - 1; row++) {
+                                                    for (c = 0; c < myTab.rows[row].cells.length; c++) {   // EACH CELL IN A ROW.
+
+                                                        var element = myTab.rows.item(row).cells[c];
+                                                        if (element.childNodes[0].getAttribute('type') == 'text') {
+                                                            values.push("" + element.childNodes[0].value + "");
+                                                        }
+                                                    }
+
+                                                }
+                                                for (var k = 0; k < values.length; k = k + 3) {
+
+                                                    total = total + (values[k + 1] * values[k + 2]);
+
+                                                }
+                                                total = total + 0.05*total;
+                                                document.getElementById("total").value = total;
+
+                                            }
+                                        </script>
+
+                                        <div class="col-10">
+                                        </div>
+                                        <div class="col-6">
+                                            <label for="x_card_code" class="control-label mb-1">Total</label>
+                                            <div class="input-group">
+                                                <input id="total" name="total" type="tel" class="form-control cc-cvc"
+                                                       value="" data-val="true"
+                                                       data-val-required="Please enter the security code"
+                                                       data-val-cc-cvc="Please enter a valid security code"
+                                                       autocomplete="off">
+
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div>
+
+                                            <button id="payment-button" type="submit" onclick="submit();"
+                                                     class="btn btn-lg btn-info btn-block">
+                                                <i></i>&nbsp;
+                                                <span id="payment-button-amount">Add Order</span>
+                                                <span id="payment-button-sending" style="display:none;">Sending…</span>
+                                            </button>
+
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <!-- PAGE CONTENT-->
+
+                    <div class="page-content--bgf7">
+                        <div>
+                            <div class="section__content section__content--p30">
+                                <div class="container-fluid">
+                                  <div class="row">
+                                      <div class="col-md-12">
+                                          <div class="overview-wrap">
+                                              <h2 class="title-1">Current Orders</h2>
+                                          </div>
+                                      </div>
+                                  </div>
+
+
+                                  <div class="row">
+                                  <div class="column" style="background-color:#F1F1F1;">
+                                    <div class="table-responsive m-b-40">
+                                    <table class="table table-borderless table-data3" id="myTable">
+                                      <tbody>
+
+                                      <script>
+                                          var table = document.getElementById("myTable");
+                                          var ordertoken = [];
+                                          var userid = [];
+                                          var orderid = [];
+                                          var itemnames = [];
+                                          var fprice = [];
+                                          var stat = [];
+                                          var quantity = [];
+                                          var delivery =[];
+                                          var ordertime =[];
+                                          var ref = firebase.database().ref("/Order/");
+                                          ref.on("value", function (snapshot) {
+                                            ordertoken = [];
+                                            userid = [];
+                                            orderid = [];
+                                            itemnames = [];
+                                            fprice = [];
+                                            stat = [];
+                                            quantity = [];
+                                            delivery =[];
+                                            ordertime =[];
+                                              while (table.hasChildNodes()) {
+                                                  //          alert("In");
+                                                  table.removeChild(table.firstChild);
+                                              }
+                                              //  alert("first");
+
+                                              //document.write("fff");
+                                              var b = 0;
+                                              snapshot.forEach(function (data) {
+
+                                                  var ref2 = firebase.database().ref("/Order/" + data.key);
+                                                  ref2.once("value", function (snapshot1) {
+                                                      //  alert("data key"+data.key);
+                                                      snapshot1.forEach(function (data1) {
+                                                          console.log("next key" + data1.key);
+                                                          //    alert("data1 key"+data1.key);
+                                                          var c = data1.val();
+                                                          var customer = c.customerName;
+                                                          var user_id = c.user_id;
+                                                          var order_id = c.order_id;
+                                                          var order_token = c.order_token;
+                                                          var order_time = c.order_time;
+                                                          var delivery_add = c.delivery_add;
+                                                          var item1;
+                                                          var fprice1;
+                                                          var quantity1;
+                                                          var status1;
+                                                          //    alert("length of snapshot"+snapshot1.numChildren());
+                                                          for (var k = 0; k < 10; k++) {
+
+
+                                                              var ref3 = firebase.database().ref("/Order/" + data.key + "/" + data1.key + "/" + "orderItemEntitty" + "/" + k + "/");
+                                                              ref3.once("value", function (snapshot2) {
+                                                                  //  alert("item"+k);
+                                                                  snapshot2.forEach(function (data2) {
+                                                                      //  alert("data2      keyy"+data2.key);
+
+                                                                      if (data2.key == "itemName") {
+
+                                                                          item1 = data2.val();
+                                                                          //    alert("aaaaaaaaaaaaaaaaaa"+item1);
+                                                                      }
+
+                                                                      if (data2.key == "quantity") {
+                                                                          quantity1 = data2.val();
+                                                                      }
+                                                                      if (data2.key == "status") {
+                                                                          status1 = data2.val();
+
+                                                                          if (status1 == 0) {
+                                                                          //        alert("asdsfggfgdfgsgagsgaf");
+                                                                              userid[b] = user_id;
+                                                                              orderid[b] = order_id;
+                                                                              ordertoken[b] = order_token;
+                                                                              quantity[b] = quantity1;
+                                                                              stat[b] = status1;
+                                                                              ordertime[b] = order_time;
+                                                                              //  fprice[b] = fprice1;
+                                                                              itemnames[b] = item1;
+                                                                        //      alert(delivery_add);
+                                                                              delivery[b] = delivery_add;
+
+                                                                              //    alert("aaaaaa"+itemnames[b]+  quantity[b] );
+                                                                              //  $("myTable").children().remove()'
+
+
+                                                                              b++;
+
+                                                                          }
+                                                                      }
+
+                                                                      //  document.write(data2.val());
+                                                                  });
+
+                                                              }, function (errorObject) {
+                                                                  console.log("The read failed: " + errorObject.code);
+                                                              });
+                                                          }
+                                                      });
+
+
+                                                  }, function (errorObject) {
+                                                      console.log("The read failed: " + errorObject.code);
+                                                  });
+
+                                              });
+                                              //  table.innerHTML = "";
+                                              var temp1,temp2,temp3,temp4,temp5,temp6,temp7,temp8;
+                                                  for(var i = 0; i < orderid.length; i++) {
+                                                     for(var j=1; j < (orderid.length-i); j++) {
+                                                  //     alert(ordertime[j-1].indexOf(":"));
+                                                       var first = ordertime[j-1].indexOf(":");
+                                                       var second = ordertime[j].indexOf(":")
+                                                    //    alert("first"+ordertime[j-1].substring(first-2));
+                                                    //    alert("second"+ordertime[j].substring(second-2));
+                                                        if((ordertime[j-1])>(ordertime[j]))
+                                                        {
+                                                    //      alert("swap");
+                                                          temp1 = orderid[j-1];
+                                                          orderid[j-1] = orderid[j];
+                                                          orderid[j] = temp1;
+                                                          temp2 = ordertime[j-1];
+                                                          ordertime[j-1] = ordertime[j];
+                                                          ordertime[j] = temp2;
+                                                          temp3 = quantity[j-1];
+                                                          quantity[j-1] = quantity[j];
+                                                          quantity[j] = temp3;
+                                                          temp4 = userid[j-1];
+                                                          userid[j-1] = userid[j];
+                                                          userid[j] = temp4;
+                                                          temp5 = stat[j-1];
+                                                          stat[j-1] = stat[j];
+                                                          stat[j] = temp5;
+                                                          temp6 = itemnames[j-1];
+                                                          itemnames[j-1] = itemnames[j];
+                                                          itemnames[j] = temp6;
+                                                          temp7 = ordertoken[j-1];
+                                                          ordertoken[j-1] = ordertoken[j];
+                                                          ordertoken[j] = temp7;
+                                                          temp8 = delivery[j-1];
+                                                          delivery[j-1] = delivery[j];
+                                                          delivery[j] = temp8;
+                                                        }
+                                                     }
+                                                  }
+                                              var corders;var head=0;
+                                                for (var o = 0; o < itemnames.length; o++) {
+                                            //      alert("vallll"+o);
+                                              //      alert("length"+quantity.length);
+                                              corders = {
+                                                  User_Id: userid[o],
+                                                  Order_Id: orderid[o],
+                                                  OrderToken: ordertoken[o],
+                                                  Item: itemnames[o],
+                                                  Status: "Order Prepared",
+                                                  Address: "E/A102",
+                                                  Quantity: quantity[o],
+                                                  delivery_add:delivery[o]
+                                              };
+
+                                              if (head == 0) {
+                                                  var header = table.createTHead();
+                                                  var row = header.insertRow(0);
+
+                                                  var cell3 = row.insertCell(0);
+                                                  var cell4 = row.insertCell(1);
+                                                  var cell5 = row.insertCell(2);
+                                                  var cell6 = row.insertCell(3);
+                                                  var cell7 = row.insertCell(4);
+
+
+                                                  cell3.style.color = "white";
+                                                  cell4.style.color = "white";
+                                                  cell5.style.color = "white";
+                                                  cell6.style.color = "white";
+                                                  cell7.style.color = "white";
+
+
+                                                  cell3.innerHTML = "Token";
+                                                  cell4.innerHTML = "Item Name";
+                                                  cell5.innerHTML = "Quantity";
+                                                  cell6.innerHTML = "Status";
+                                                  cell7.innerHTML = "Order Type";
+
+                                                  cell3.style.textAlign = "center";
+                                                  cell4.style.textAlign = "center";
+                                                  cell5.style.textAlign = "center";
+                                                  cell6.style.textAlign = "center";
+                                                  cell7.style.textAlign = "center";
+                                                    head++;
+                                              }
+
+
+
+                                              var row = table.insertRow(o+1);
+
+                                              var cell3 = row.insertCell(0);
+                                              var cell4 = row.insertCell(1);
+                                              var cell5 = row.insertCell(2);
+                                              //cell4.id='select';
+                                              var cell6 = row.insertCell(3);
+                                              var cell7 = row.insertCell(4);
+                                              var dropdown = "<input style=\"width:80px;height:33px\" type=\"button\" id=\"select1" + b + "\" onclick=\"getId(this)\"  class=\"btn btn-success\" value=\"Accept\" >\n" +
+                                                      "<input style=\"width:80px;height:33px\" type=\"button\" id=\"select1" + b + "\" onclick=\"getId1(this)\"  class=\"btn btn-danger\" value=\"Reject\" >\n" +
+
+
+                                                      "<\/SELECT>";
+
+
+                                              row.style.backgroundColor = "white";
+
+                                              cell3.innerHTML = corders.OrderToken;
+                                              cell4.innerHTML = corders.Item;
+
+                                              cell6.innerHTML += dropdown;
+
+                                              //  document.getElementById('select'+b).value = '2'
+
+                                              cell5.innerHTML = corders.Quantity;
+                                            //  alert(delivery[o]);
+                                            //  alert(itemnames[o]);
+                                              if(delivery[o]==undefined)
+                                              {
+
+                                                        cell7.innerHTML = "Student Order";
+
+                                              }
+                                              else {
+                                                cell7.innerHTML = "Faculty Order";
+
+                                              }
+                                            //  cell7.innerHTML = "orders"
+
+                                              cell3.style.textAlign = "center";
+                                              cell4.style.textAlign = "center";
+                                              cell5.style.textAlign = "center";
+                                              cell6.style.textAlign = "center";
+                                              cell7.style.textAlign = "center";
+
+                                              cell4.setAttribute('class','itemname');
+                                            }
+
+                                          }, function (errorObject) {
+                                              console.log("The read failed: " + errorObject.code);
+                                          });
+
+
+                                          function  getId(element) {
+                                            //      alert("row" + element.parentNode.parentNode.rowIndex +
+                                            //      " - column" + element.parentNode.cellIndex);
+                                                  var row = element.parentNode.parentNode.rowIndex;
+                                                  var column = element.parentNode.cellIndex;
+                                            //      alert(document.getElementById("myTable").rows[row].cells[1].innerHTML);
+                                            //      alert(document.getElementById("myTable").rows[row].cells[0].innerHTML);
+                                            //      alert("USER"+ userid[row - 1]);
+                                            //      alert("ORDER"+orderid[row-1]);
+
+                                                  var ref4 = firebase.database().ref("/Order/" + userid[row - 1] + "/" + orderid[row - 1] + "/" + "orderItemEntitty" + "/");
+                                                  ref4.once("value", function (snapshot) {
+                                                      var flag = 0;
+                                                      snapshot.forEach(function (data) {
+                                                          //      alert("innn"+data.key);
+
+                                                          if (flag == 0) {
+                                                              var itemval = data.val();
+                                                              var itemId1 = itemval.itemId;
+                                                              var quantity1 = itemval.quantity;
+                                                              var itemName1 = itemval.itemName;
+                                                              var jain1 = itemval.jain;
+                                                              var orderPlaced = itemval.orderPlaced;
+                                                          //    var statusUpdateTime itemval.statusUpdateTime;
+                                                              var stat=1;
+
+                                                          //    alert(statusUpdateTime);
+                                                              //  alert(itemId1);
+                                                              if (itemName1 == document.getElementById("myTable").rows[row].cells[1].innerHTML) {
+                                                                  //      alert("inside biggest ac"+"data key"+data.key);
+                                                                  var data1={0:(new Date().getDate() < 10 ? '0' : '') + new Date().getDate()+"-"
+
+                                                                            + (new Date().getMonth() < 10 ? '0' : '') + (new Date().getMonth()+1)+"-"
+                                                                          + (new Date()).getFullYear() + " " +orderPlaced};
+                                                                  var ref5 = firebase.database().ref("/Order/" + userid[row - 1] + "/" + orderid[row - 1] + "/" + "orderItemEntitty" + "/" + data.key + "/");
+                                                                  ref5.set({
+                                                                      itemId: itemId1,
+                                                                      itemName: itemName1,
+                                                                      status: stat,
+                                                                      jain: jain1,
+                                                                      quantity: quantity1,
+                                                                      orderPlaced:orderPlaced,
+                                                                      confirmed: (new Date()).getHours() + ":"+ (new Date()).getMinutes(),
+                                                                      statusUpdateTime:data1
+                                                                  });
+
+                                                                  flag++;
+                                                              }
+
+                                                          }
+                                                      });
+                                                  }, function (errorObject) {
+                                                      console.log("error");
+                                                  });
+                                              }
+                                              function  getId1(element) {
+                                                //      alert("row" + element.parentNode.parentNode.rowIndex +
+                                                //      " - column" + element.parentNode.cellIndex);
+                                                      var row = element.parentNode.parentNode.rowIndex;
+                                                      var column = element.parentNode.cellIndex;
+                                                //      alert(document.getElementById("myTable").rows[row].cells[1].innerHTML);
+                                                  //    alert(document.getElementById("myTable").rows[row].cells[0].innerHTML);
+                                                  //    alert("USER"+ userid[row - 1]);
+                                                  //    alert("ORDER"+orderid[row-1]);
+
+                                                      var ref4 = firebase.database().ref("/Order/" + userid[row - 1] + "/" + orderid[row - 1] + "/" + "orderItemEntitty" + "/");
+                                                      ref4.once("value", function (snapshot) {
+                                                          var flag = 0;
+                                                          snapshot.forEach(function (data) {
+                                                              //      alert("innn"+data.key);
+
+                                                              if (flag == 0) {
+                                                                  var itemval = data.val();
+                                                                  var itemId1 = itemval.itemId;
+                                                                  var quantity1 = itemval.quantity;
+                                                                  var itemName1 = itemval.itemName;
+                                                                  var jain1 = itemval.jain;
+                                                                  var orderPlaced = itemval.orderPlaced;
+
+                                                                  var stat=-1;
+
+
+                                                                  //  alert(itemId1);
+                                                                  if (itemName1 == document.getElementById("myTable").rows[row].cells[1].innerHTML) {
+                                                                      //      alert("inside biggest ac"+"data key"+data.key);
+
+                                                                      var ref5 = firebase.database().ref("/Order/" + userid[row - 1] + "/" + orderid[row - 1] + "/" + "orderItemEntitty" + "/" + data.key + "/");
+                                                                      ref5.set({
+                                                                          itemId: itemId1,
+                                                                          itemName: itemName1,
+                                                                          status: stat,
+                                                                          jain: jain1,
+                                                                          quantity: quantity1,
+                                                                          orderPlaced:orderPlaced,
+                                                                          rejected: (new Date()).getHours() + ":"+ (new Date()).getMinutes()
+                                                                      });
+                                                                      flag++;
+                                                                  }
+
+                                                              }
+                                                          });
+                                                      }, function (errorObject) {
+                                                          console.log("error");
+                                                      });
+                                                  }
+
+
+
+
+
+                                      </script>
+                                      </tbody>
+                                    </table>
+
+                                  </div>
+                                  </div>
+                                  <div class="column" style="background-color:#F1F1F1;">
+                                    <div class="table-responsive m-b-40">
+                                    <table class="table table-borderless table-data3" id="myTable2">
+                                    <tbody>
+                                      <script>
+
+                                      var ordertoken2 = [];
+                                      var userid2 = [];
+                                      var orderid2 = [];
+                                      var itemnames2 = [];
+                                      var fprice2 = [];
+                                      var stat2 = [];
+                                      var quantity2 = [];
+                                      var ordertime2 =[];
+                                      var table1 = document.getElementById("myTable2");
+
+                                      var ref = firebase.database().ref("/Order/");
+                                      ref.on("value", function (snapshot) {
+                                        ordertoken2 = [];
+                                        userid2 = [];
+                                        orderid2 = [];
+                                        itemnames2 = [];
+                                        fprice2 = [];
+                                        stat2 = [];
+                                        quantity2 = [];
+                                        ordertime2 =[];
+                                        while (table1.hasChildNodes()) {
+                                          //            alert("In");
+                                            table1.removeChild(table1.firstChild);
+                                        }
+
+                                        //    alert("first");
+
+                                          //document.write("fff");
+                                          var b = 0;
+                                          snapshot.forEach(function (data) {
+
+
+                                              var ref2 = firebase.database().ref("/Order/" + data.key);
+                                              ref2.on("value", function (snapshot1) {
+
+                                                  //  alert("data key"+data.key);
+                                                  snapshot1.forEach(function (data1) {
+                                                      console.log("next key" + data1.key);
+                                                      //    alert("data1 key"+data1.key);
+                                                      var c = data1.val();
+                                                      var customer = c.customerName;
+                                                      var user_id = c.user_id;
+                                                      var order_id = c.order_id;
+                                                      var order_token = c.order_token;
+                                                      var delivery_add = c.delivery_add;
+                                                      var order_time = c.order_time;
+
+                                                      var deliman_id = c.delivery_guy;
+
+
+                                                      var item1;
+                                                      var fprice1;
+                                                      var quantity1;
+                                                      var status1;
+
+                                                      var t=0;
+                                                      var y=0;
+                                                      //    alert("length of snapshot"+snapshot1.numChildren());
+                                                      for (var k = 0; k < 10; k++) {
+
+
+                                                          var ref3 = firebase.database().ref("/Order/" + data.key + "/" + data1.key + "/" + "orderItemEntitty" + "/" + k + "/");
+
+                                                          ref3.once("value", function (snapshot2) {
+                                                              //  alert("item"+k);
+                                                          //    alert(""+snapshot2.numChildren());
+                                                              if(snapshot2.numChildren()!=0)
+                                                              {
+                                                                t++;
+                                                            //    alert(t);
+                                                              }
+                                                              snapshot2.forEach(function (data2) {
+                                                                  //  alert("data2      keyy"+data2.ke);
+
+                                                                  if (data2.key == "itemName") {
+
+                                                                      item1 = data2.val();
+                                                                      //    alert("aaaaaaaaaaaaaaaaaa"+item1);
+                                                                  }
+
+                                                                  if (data2.key == "quantity") {
+                                                                      quantity1 = data2.val();
+                                                                  }
+                                                                  if (data2.key == "status") {
+                                                                      status1 = data2.val();
+                                                                    //  alert("aaaaaaa" + status1);
+                                                                      if (status1 == 3 && delivery_add!=null && deliman_id==undefined) {
+
+                                                                      //    alert("aaaaaaaaaaaaaaaaaa" + status1);
+                                                                        y++;
+                                                                      //    alert("asdsfggfgdfgsgagsgaf "+itemnames2[b]);
+
+
+                                                                          //    alert("aaaaaa"+itemnames[b]+  quantity[b] );
+                                                                          //  $("myTable").children().remove()'
+
+
+
+
+                                                                      }
+                                                                  }
+                                                                  if (data2.key == "quantity") {
+
+
+                                                                      //    }
+
+
+                                                                  }
+
+
+                                                                  //  document.write(data2.val());
+                                                              });
+
+                                                          }, function (errorObject) {
+                                                              console.log("The read failed: " + errorObject.code);
+                                                          });
+                                                      }
+                                                      if(t==y)
+                                                      {
+                                                        ordertoken2[b] = order_token;
+                                                        orderid2[b] = order_id;
+                                                        userid2[b]=user_id;
+                                                        ordertime2[b] = order_time;
+                                                          b++;
+                                                      }
+                                                  });
+
+
+                                              }, function (errorObject) {
+                                                  console.log("The read failed: " + errorObject.code);
+                                              });
+
+                                          });
+                                          //  table.innerHTML = "";
+
+                                          var temp1,temp2,temp3,temp4,temp5,temp6,temp7;
+                                              for(var i = 0; i < orderid2.length; i++) {
+                                                 for(var j=1; j < (orderid2.length-i); j++) {
+                                                //   alert(ordertime2[j-1].indexOf(":"));
+                                                //   var first = ordertime2[j-1].indexOf(":");
+                                                //   var second = ordertime2[j].indexOf(":")
+                                                //    alert("first"+ordertime2[j-1].substring(first-2));
+                                                //    alert("second"+ordertime2[j].substring(second-2));
+                                                    if((ordertime2[j-1])>(ordertime2[j]))
+                                                    {
+                                                    //  alert("swap");
+                                                      temp1 = orderid2[j-1];
+                                                      orderid2[j-1] = orderid2[j];
+                                                      orderid2[j] = temp1;
+                                                      temp2 = ordertime2[j-1];
+                                                      ordertime2[j-1] = ordertime2[j];
+                                                      ordertime2[j] = temp2;
+
+                                                      temp4 = userid2[j-1];
+                                                      userid2[j-1] = userid2[j];
+                                                      userid2[j] = temp4;
+
+
+                                                      temp7 = ordertoken2[j-1];
+                                                      ordertoken2[j-1] = ordertoken2[j];
+                                                      ordertoken2[j] = temp7;
+
+                                                    }
+                                                 }
+                                              }
+
+                                          var corders;var head=0;
+                                            for (var o = 0; o < orderid2.length; o++) {
+                                        //  var o = 0;
+                                          //      alert("length"+quantity.length);
+                                          corders = {
+                                              User_Id: userid2[o],
+                                              Order_Id: orderid2[o],
+                                              OrderToken: ordertoken2[o],
+                                              Item: itemnames2[o],
+                                              Status: stat2[o],
+                                              Address: "E/A102",
+                                              Quantity: quantity2[o]
+                                          };
+
+                                          if (head == 0) {
+                                              var header = table1.createTHead();
+                                              var row = header.insertRow(0);
+
+                                              var cell3 = row.insertCell(0);
+
+                                              var cell6 = row.insertCell(1);
+                                              //       var cell7 = row.insertCell(4);
+
+
+                                              cell3.style.color = "white";
+
+                                              cell6.style.color = "white";
+                                              //       cell7.style.color = "white";
+
+
+                                              cell3.innerHTML = "Token";
+
+                                              cell6.innerHTML = "Assign Delivery Guy";
+                                              //     cell7.innerHTML =  "Address";
+
+                                              cell3.style.textAlign = "left";
+
+                                              cell6.style.textAlign = "left";
+
+                                              head++;
+                                              //     cell7.style.textAlign = "center";
+                                          }
+
+
+
+                                          var row = table1.insertRow(o+1);
+
+                                          var cell3 = row.insertCell(0);
+
+                                          //cell4.id='select';
+                                          var cell6 = row.insertCell(1);
+                                          //  var cell7 = row.insertCell(4);
+                                          var dropdown = "<input style=\"width:80px;height:35px;\" type=\"button\" id=\"prepared" + 2 + "\" onclick=\"getId4(this);\" value=\"Assign\" class=\"btn btn-secondary btn\" >\n" +
+
+
+
+                                                  "<\/input>";
+
+                                                    row.style.backgroundColor = "white";
+
+
+                                          cell3.innerHTML = corders.OrderToken;
+
+
+                                          cell6.innerHTML += dropdown;
+                                      //    document.getElementById('select1' + b).checked = true;
+
+
+
+
+                                          //  cell7.innerHTML = corders.Address;
+
+
+                                          cell3.style.textAlign = "left";
+
+                                          cell6.style.textAlign = "left";
+
+
+                                          cell3.style.fontSize = "20px";
+
+                                          cell6.style.fontSize = "20px";
+                                          //    cell7.style.textAlign = "center";
+
+
+                                          cell3.setAttribute('class','ordertoken');
+                                        }
+
+                                      }, function (errorObject) {
+                                          console.log("The read failed: " + errorObject.code);
+                                      });
+                                      var userida,orderida;
+                                      function  getId4(element) {
+                                      //  alert("innnnnnnnnn");
+                                        //      alert("row" + element.parentNode.parentNode.rowIndex +
+                                        //      " - column" + element.parentNode.cellIndex);
+                                              var row = element.parentNode.parentNode.rowIndex;
+                                              var column = element.parentNode.cellIndex;
+                                            //  alert(document.getElementById("myTable").rows[row].cells[1].innerHTML);
+                                            //  alert(document.getElementById("myTable").rows[row].cells[0].innerHTML);
+                                          //    alert("USER"+ userid2[row-1]);
+                                        //      alert("ORDER"+orderid2[row-1]);
+                                        userida=userid2[row-1];
+                                        orderida = orderid2[row-1];
+
+                                              var delivery_add;
+                                              var ref4 = firebase.database().ref("/Order/" + userid2[row - 1] + "/" + orderid2[row - 1]);
+                                              ref4.once("value", function (snapshot) {
+                                                  var flag = 0;
+                                                  snapshot.forEach(function (data) {
+                                                           if(data.key=="delivery_add")
+                                                           {
+                                                             delivery_add=data.val();
+
+                                                             displaymodal(delivery_add,userid2[row-1],orderid2[row-1]);
+
+                                                           }
+                                                  });
+                                              }, function (errorObject) {
+                                                  console.log("error");
+                                              });
+                                          }
+                                      function assigndelivery()
+                                      {
+
+
+                                      //  alert("USER"+ userida);
+                                      //    alert("ORDER"+orderida);
+                                        var ref8 = firebase.database().ref("/Order/" + userida + "/" + orderida+"/delivery_guy");
+                                        //var data4 = {deliman_id:document.getElementById("deliveryguy").value};
+                                        ref8.set({
+                                          deliman_id:document.getElementById("deliveryguy").value
+                                        });
+
+                                      }
+
+                                      function displaymodal(deliveryaddress,userid,orderid)
+                                            {
+                                            var modal = document.getElementById('myModal');
+                                            modal.style.display = "block";
+                                            document.getElementById("addresstext").value=deliveryaddress;
+
+                                            // Get the <span> element that closes the modal
+                                            var span = document.getElementsByClassName("close")[0];
+
+                                            // When the user clicks the button, open the modal
+                                            // When the user clicks on <span> (x), close the modal
+                                            span.onclick = function() {
+                                              modal.style.display = "none";
+                                            }
+
+                                            // When the user clicks anywhere outside of the modal, close it
+                                            window.onclick = function(event) {
+                                              if (event.target == modal) {
+                                                modal.style.display = "none";
+                                              }
+                                            }
+
+
+                                      }
+
+                                      function tokenmodal(deliveryaddress)
+                                            {
+                                            var modal = document.getElementById('myModal1');
+                                            modal.style.display = "block";
+                                            document.getElementById("tokentext").value=deliveryaddress;
+
+                                            // Get the <span> element that closes the modal
+                                            var span = document.getElementsByClassName("close")[0];
+
+                                            // When the user clicks the button, open the modal
+                                            // When the user clicks on <span> (x), close the modal
+                                            span.onclick = function() {
+                                              modal.style.display = "none";
+                                            }
+
+                                            // When the user clicks anywhere outside of the modal, close it
+                                            window.onclick = function(event) {
+                                              if (event.target == modal) {
+                                                modal.style.display = "none";
+                                              }
+                                            }
+
+
+                                      }
+
+
+                                      </script>
+                                    </tbody>
+                                    </table>
+
+                                </div>
+                                  </div>
+                                </div>
+                                <div id="myModal" class="modal">
+
+                                  <!-- Modal content -->
+                                  <div class="modal-content">
+                                    <span style="float:right" class="close">&times;</span>
+
+                                    <textarea name="name" id="addresstext" rows="8" cols="80"></textarea>
+                                    <input type="text" placeholder="Enter Delivery Guy" id="deliveryguy" style="border:1px solid">
+                                    <br>
+
+                                      <input width="40px" height="50px" type="button" value="Assign" onclick="assigndelivery()" class="" style="float:right">
+                                  </div>
+
+                                </div>
+                                <div id="myModal1" class="modal">
+
+                                  <!-- Modal content -->
+                                  <div class="modal-content">
+
+                                    <br>
+                                    <br>
+                                    <h1 style="text-align:center">Token Number</h1>
+                                    <br>
+                                    <br>
+
+                                    <textarea style="text-align:center;font-size:4em" name="name" id="tokentext" rows="1" cols="80"></textarea>
+                                    <br>
+
+                                  </div>
+
+                                </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Jquery JS-->
+<script src="/js/query-3.2.1.min.js"></script>
+<!-- Bootstrap JS-->
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<!-- Vendor JS       -->
+<script src="/js/slick.min.js">
+</script>
+<script src="/js/wow.min.js"></script>
+<script src="/js/animsition.min.js"></script>
+<script src="/js/bootstrap-progressbar.min.js">
+</script>
+<script src="/js/jquery.waypoints.min.js"></script>
+<script src="/js/jquery.counterup.min.js">
+</script>
+<script src="/js/circle-progress.min.js"></script>
+<script src="/js/perfect-scrollbar.js"></script>
+<script src="/js/Chart.bundle.min.js"></script>
+<script src="/js/select2.min.js">
+</script>
+
+<!-- Main JS-->
+<script src="/js/main.js"></script>
+
+
+</body>
+
+</html>
+<!-- end document-->

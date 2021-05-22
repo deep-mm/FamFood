@@ -20,6 +20,9 @@ The scope also comprises of implementing a recommendation system for the custome
 **Tools/Software used:**
 
 UX Design: Adobe XD - Research process explained by the UX designer (https://www.urvashikokate.com/famfood)
+
 Language: Android (Java + XML), Web (Angular + Node)
+
 Database: NoSQL (Firebase Google)
+
 Authentication: Firebase (Google)
